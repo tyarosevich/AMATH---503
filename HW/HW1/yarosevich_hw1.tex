@@ -129,11 +129,13 @@ T(t) = T_n(t) = A_nsin(\omega_n t) + B_ncos(\omega_n t)
 \end{aligned}
 \end{equation}
 Combining the two ODEs, absorbing the $A_n$ from the x-dependent ODE into the $A_n$ and $B_n$ from the t-dependeont one, and using the principle of superposition, we have a sum of possible linear combinations of different solutions:
+\begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
 \begin{equation}
 \begin{aligned}
 u(x,t) = \sum^{\infty}_{n=1}\big{(}A_nsin(\omega_n t) + B_ncos(\omega_n t)\big{)}sin(\frac{n\pi x}{L})
 \end{aligned}
 \end{equation}
+\end{tcolorbox}
 We now apply the initial conditions, so that we can determine the arbitrary constants, beginning with the IC: $u(x,0) = f(x)$.
 \begin{equation}
 \begin{aligned}
@@ -141,7 +143,7 @@ u(x,0) = \sum^{\infty}_{n=1}B_nsin(\frac{n\pi x}{L}) = f(x)
 \end{aligned}
 \end{equation}
 This is a sine series, so we can use the formula derived in class and in the notes using the orthogonality of the basis to determine $B_n$:
-\\begin{equation}
+\begin{equation}
 \begin{aligned}
 B_n = \frac{2}{L}\int_0^L f(x)sin\frac{n\pi x}{L}dx
 \end{aligned}
@@ -153,7 +155,7 @@ B_n = \frac{2}{L}\big{[}\int_0^L xsin\frac{n\pi x}{L}dx + \int_0^L (L-x)sin\frac
 B_n = \frac{2}{L}\big{[}\int_0^L xsin\frac{n\pi x}{L}dx + \int_0^L Lsin\frac{n\pi x}{L}dx -\int_0^L xsin\frac{n\pi x}{L}d \big{]}\\
 \end{aligned}
 \end{equation}
-First I will use integration by parts to determine an indefinite integral of $xsin(\frac{n\pi x}{L}$.
+First I will use integration by parts to determine an indefinite integral of $xsin(\frac{n\pi x}{L})$.
 \begin{equation}
 \begin{aligned}
 u = x, du = 1\\
@@ -177,6 +179,98 @@ B_n = \frac{2}{L}\Big{[}\frac{2L^2}{n^2\pi^2}sin(\frac{n\pi}{2})\Big{]}
 B_n = \frac{4L}{n^2\pi^2}sin(\frac{n\pi}{2})
 \end{aligned}
 \end{equation}
+\end{tcolorbox}
+To apply the other initial condition we must note that we can move the differential operator inside the summation is a linear combination of well-behaved functions.
+\begin{equation}
+\begin{aligned}
+u_t(x,t)= \frac{d}{dt}\Big{[}\sum^{\infty}_{n=1}\big{(}A_nsin(\omega_n t) + B_ncos(\omega_n t)\big{)}sin(\frac{n\pi x}{L})\Big{]}\\
+u_t(x,t) = \sum^{\infty}_{n=1}A_n\omega_ncos(\omega_n t)sin(\frac{n\pi x}{L}) - B_n\omega_nsin(\omega_n t)sin(\frac{n\pi x}{L})\\
+u_t(x,0) = \sum^{\infty}_{n=1}A_n\omega_nsin(\frac{n\pi x}{L})=0
+\end{aligned}
+\end{equation}
+Here we can observe that in order to satisfy the initial condition across all values of $x$, the arbitrary constant $A_n$ must be equal to zero. Thus we can now plug the values $A_n$ and $B_n$ from \textbf{(12)} above and the general solution from \textbf{(6)} to obtain a solution that satisfies all the Boundary and Initial Conditions:
+\begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
+\begin{equation}
+\begin{aligned}
+u(x,t) = \frac{4L}{\pi^2}\sum^{\infty}_{n=1}\frac{sin(\frac{n\pi}{2})}{n^2}cos(\omega_n t)sin(\frac{n\pi x}{L})
+\end{aligned}
+\end{equation}
+\end{tcolorbox}
+\section*{\textbf{(2)}}
+\subsection*{\textbf{(a)}}
+If the time derivative is equal to zero, we have:
+\begin{equation}
+\begin{aligned}
+\alpha^2u_{xx} - bu = 0\\
+u_{xx} = \frac{b}{\alpha^2}u
+\end{aligned}
+\end{equation}
+I simply noted by inspection that the solution must be an exponential with a positive or negative coefficient in front of $x$ equal to the inverse of $\sqrt{\frac{b}{\alpha^2}}$, thus when multiplied through twice by taking the derivative, we satisfy the PDE. Any linear combination of such terms works, thus:
+\begin{equation}
+\begin{aligned}
+u(x) = c_1e^{\frac{\sqrt{b}}{\alpha}x} + c_2e^{-\frac{\sqrt{b}}{\alpha}x}
+\end{aligned}
+\end{equation}
+We then apply the boundary conditions:
+\begin{equation}
+\begin{aligned}
+u(0) = c_1 + c_2 = 0\\
+c_1 = -c_2\\
+u(L) = c_1e^{\frac{\sqrt{b}}{\alpha}L} -c_1e^{-\frac{\sqrt{b}}{\alpha}L} = 0\\
+c_1e^{\frac{\sqrt{b}}{\alpha}L} =c_1e^{-\frac{\sqrt{b}}{\alpha}L} 
+\end{aligned}
+\end{equation}
+Because the two exponentials are different, the only way to satisfy this equation is if $c_1 = c_2 = 0$, which is perfectly sensible since we would expect a rod that is dissipating heat to eventually reach a zero temperature.
+\subsection*{\textbf{(b)}}
+We proceed by separation of variables, assuming that the solution is of the form $u(x,t) = X(x)T(t)$. \textbf{**Note} that I will reclaim the results from \textbf{(1)} and \textbf{(3) / (4)} above. Substituting these into the PDE gives:
+\begin{equation}
+\begin{aligned}
+\frac{T''(t)}{T(t)\alpha^2}+\frac{b}{\alpha^2} = \frac{X''(x)}{X(x)} = K 
+\end{aligned}
+\end{equation}
+Again let $K=-\lambda^2$ since we know other values give trivial solutions. We also already know the solution for $X(x)$ from above, thus we turn to the t-dependent ODE:
+\begin{equation}
+\begin{aligned}
+\frac{T''(t)}{T(t)\alpha^2}+\frac{b}{\alpha^2} = -\lambda^2\\
+T'(t) + bT(t) + \lambda^2\alpha^2T(t) = 0\\
+T'(t) + (\lambda^2\alpha^2+b)T(t) = 0\\
+T'(t) = -(\lambda^2\alpha^2 + b)T(t)
+\end{aligned}
+\end{equation}
+Now let $c=-(\lambda^2\alpha^2 + b)$ and we have an easily solved ODE using an exponential:
+\begin{equation}
+\begin{aligned}
+T(t) = \frac{1}{c}e^{ct}\\
+T_n(t) = A_ne^{ct}\\
+n = 1,2,3...
+\end{aligned}
+\end{equation}
+Utilizing this $T_n(t)$ and the result from part one for the $X(x)$ term and combining arbitrary constants, we thus have an infinite number of solutions given by $u(x,t) = X_n(x)T_n(t)$:
+\begin{equation}
+\begin{aligned}
+u(x,t) = \sum_{n=1}^\infty A_ne^{-(\alpha^2\lambda^2 + b)t}sin(\frac{n\pi x}{L})
+\end{aligned}
+\end{equation}
+As in sections \textbf{(3) / (4)} above, this already satisfies the BCs since they are the same in part 2. The initial condition is given by:
+\begin{equation}
+\begin{aligned}
+u(x,0) = \sum_{n=1}^\infty A_nsin(\frac{n\pi x}{L})
+\end{aligned}
+\end{equation}
+This is a sine series and its coefficient can be determined for any $f(x)$ in the domain $0<x<L$ with the formula derived in class and given in the notes:
+\begin{equation}
+\begin{aligned}
+A_n = \frac{2}{L}\int_0^Lf(x)sin(\frac{n\pi x}{L})
+\end{aligned}
+\end{equation}
+Thus our solution satisfies the PDE, IC and BCs. To finally answer the prompt, we take the limit as $t\to\infty$:
+\begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
+\begin{equation}
+\begin{aligned}
+\lim_{t\to\infty}\sum_{n=1}^\infty A_ne^{-(\alpha^2\lambda^2 + b)t}sin(\frac{n\pi x}{L})
+\end{aligned}
+\end{equation}
+We can see that the exponential will go to zero, and the steady state solution is zero as $t\to\infty$, which is the same as part \textbf{(a)}.
 \end{tcolorbox}
 
 \end{document}
