@@ -1,0 +1,182 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyfoot[C]{\thepage}
+\rhead{Yarosevich - 1064712}
+
+\usepackage{siunitx} % Provides the \SI{}{} and \si{} command for typesetting SI units
+\usepackage{graphicx} % Required for the inclusion of images
+\usepackage{amsmath} % Required for some math elements 
+\usepackage[export]{adjustbox} % loads also graphicx
+\usepackage{listings}
+\usepackage{setspace}
+\usepackage{matlab-prettifier}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+\usepackage{amsfonts}
+\usepackage{color}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{bm}
+\usepackage{esvect}
+\newcommand{\uveci}{{\bm{\hat{\textnormal{\bfseries\i}}}}}
+\newcommand{\uvecj}{{\bm{\hat{\textnormal{\bfseries\j}}}}}
+\DeclareRobustCommand{\uvec}[1]{{%
+  \ifcsname uvec#1\endcsname
+     \csname uvec#1\endcsname
+   \else
+    \bm{\hat{\mathbf{#1}}}%
+   \fi
+}}
+
+
+\newcommand{\R}{\mathbb{R}}
+
+\usepackage{xcolor}
+
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+  \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-4pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep}
+\titleformat{\section}[runin]
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}[runin]
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\renewcommand{\labelenumi}{\alph{enumi}.} % Make numbering in the enumerate environment by letter rather than number (e.g. section 6)
+
+%\usepackage{times} % Uncomment to use the Times New Roman font
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{AMATH 503: Homework 1 \\Due April, 15 2019 \\ ID: 1064712} % Title
+
+\author{Trent \textsc{Yarosevich}} % Author name
+
+\date{\today} % Date for the report
+
+\begin{document}
+\maketitle % Insert the title, author and date
+\setlength\parindent{1cm}
+
+\begin{center}
+\begin{tabular}{l r}
+%Date Performed: December 1, 2017 \\ % Date the experiment was performed
+Instructor: Ka-Kit Tung % Instructor/supervisor
+\end{tabular}
+\end{center}
+
+% If you wish to include an abstract, uncomment the lines below
+% \begin{abstract}
+% Abstract text
+% \end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	SECTION 1
+%----------------------------------------------------------------------------------------
+\section*{\textbf{(1)}}
+I'll begin by doing separation of variables to find a general solution with the following assumption:
+\begin{equation}
+\begin{aligned}
+u_x = T(t)X'(x)\\
+u_{xx} = T(t)X''(x)\\
+u_t = T'(t)X(x)\\
+u_{tt} = T''(t)X(x)\\
+\end{aligned}
+\end{equation}
+Plugging this into the PDE and isolating terms based on variable we get:
+\begin{equation}
+\begin{aligned}
+\frac{T''(t)}{c^2T(t)} = \frac{X''(x)}{X(x)} = K
+\end{aligned}
+\end{equation}
+As we've learned in class, we know $K>0$ and $K=0$ will give trivial solutions, so let $K = -\lambda^2$, yielding two ODEs. Begining with the x-dependent ODE we have, by ansatz:
+\begin{equation}
+\begin{aligned}
+\frac{X''(x)}{X(x)} = -\lambda^2\\
+X''(x) + \lambda^2X(x) = 0\\
+X(x) = Asin(\lambda x) + Bcos(\lambda x)\\
+\end{aligned}
+\end{equation}
+Now applying the BCs:
+\begin{equation}
+\begin{aligned}
+X(0) = Asin(0) + Bcos(0) = 0\\
+B = 0\\
+X(L) = Asin(\lambda L) = 0\\
+\lambda L = n\pi \\
+\lambda = \frac{n\pi}{L}\\
+X(x) = X_n(x) = sin(\frac{n\pi x}{L})
+\end{aligned}
+\end{equation}
+Moving on to the time dependent ODE:
+\begin{equation}
+\begin{aligned}
+\frac{T''(t)}{c^2T(t)}= -\lambda^2\\
+T''(t) + c^2\lambda^2 T(t) = 0\\
+T(t) = Asin(\lambda ct) + Bcos(\lambda ct)\\
+\text{Let $\omega_n = c\lambda_n$}\\
+T(t) = T_n(t) = A_nsin(\omega_n t) + B_ncos(\omega_n t)
+\end{aligned}
+\end{equation}
+Combining the two ODEs, absorbing the $A_n$ from the x-dependent ODE into the $A_n$ and $B_n$ from the t-dependeont one, and using the principle of superposition, we have a sum of possible linear combinations of different solutions:
+\begin{equation}
+\begin{aligned}
+u(x,t) = \sum^{\infty}_{n=1}\big{(}A_nsin(\omega_n t) + B_ncos(\omega_n t)\big{)}sin(\frac{n\pi x}{L})
+\end{aligned}
+\end{equation}
+We now apply the initial conditions, so that we can determine the arbitrary constants, beginning with the IC: $u(x,0) = f(x)$.
+\begin{equation}
+\begin{aligned}
+u(x,0) = \sum^{\infty}_{n=1}B_nsin(\frac{n\pi x}{L}) = f(x)
+\end{aligned}
+\end{equation}
+This is a sine series, so we can use the formula derived in class and in the notes using the orthogonality of the basis to determine $B_n$:
+\\begin{equation}
+\begin{aligned}
+B_n = \frac{2}{L}\int_0^L f(x)sin\frac{n\pi x}{L}dx
+\end{aligned}
+\end{equation}
+We render this in a piecewise integral given the $f(x)$ provided in the prompt:
+\begin{equation}
+\begin{aligned}
+B_n = \frac{2}{L}\big{[}\int_0^L xsin\frac{n\pi x}{L}dx + \int_0^L (L-x)sin\frac{n\pi x}{L}dx\big{]}\\
+B_n = \frac{2}{L}\big{[}\int_0^L xsin\frac{n\pi x}{L}dx + \int_0^L Lsin\frac{n\pi x}{L}dx -\int_0^L xsin\frac{n\pi x}{L}d \big{]}\\
+\end{aligned}
+\end{equation}
+First I will use integration by parts to determine an indefinite integral of $xsin(\frac{n\pi x}{L}$.
+\begin{equation}
+\begin{aligned}
+u = x, du = 1\\
+dv = sin(\frac{n\pi x}{L})\\
+v = -\frac{L}{n\pi}cos(\frac{n\pi x}{L})\\
+uv - \int vdu = \frac{-Lx}{n\pi}cos\frac{n\pi x}{L} + \frac{L^2}{n^2\pi^2}sin\frac{n\pi x}{L}
+\end{aligned}
+\end{equation}
+Substituting this into the formula for $B_n$ we have:
+\begin{equation}
+\begin{aligned}
+B_n = \frac{2}{L}\big{[}[ \frac{-Lx}{n\pi}cos\frac{n\pi x}{L} + \frac{L^2}{n^2\pi^2}sin\frac{n\pi x}{L}]\Big{|}^{\frac{L}{2}}_0 -[\frac{cos(\frac{n\pi x}{L})}{n\pi}]\Big{|}^L_{\frac{L}{2}}\\
+-[\frac{-Lx}{n\pi}cos\frac{n\pi x}{L} + \frac{L^2}{n^2\pi^2}sin\frac{n\pi x}{L}]\Big{|}^L_{\frac{L}{2}}\\
+B_n = \frac{2}{L}\Big{[}\Big{(}\frac{L^2}{n^2\pi^2}sin(\frac{n\pi}{2})\Big{)} + \Big{(}\frac{-L^2(-1)^n}{n\pi}\Big{)} - \Big{(}(-1)^n(\frac{-L^2}{n\pi}) - \frac{L^2}{n^2\pi^2}sin(\frac{n\pi}{2})\Big{)}\Big{]}\\
+B_n = \frac{2}{L}\Big{[}\frac{2L^2}{n^2\pi^2}sin(\frac{n\pi}{2})\Big{]}
+\end{aligned}
+\end{equation}
+\begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
+\begin{equation}
+\begin{aligned}
+B_n = \frac{4L}{n^2\pi^2}sin(\frac{n\pi}{2})
+\end{aligned}
+\end{equation}
+\end{tcolorbox}
+
+\end{document}
