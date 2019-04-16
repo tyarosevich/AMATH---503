@@ -84,7 +84,7 @@ Instructor: Ka-Kit Tung % Instructor/supervisor
 %	SECTION 1
 %----------------------------------------------------------------------------------------
 \section*{\textbf{(1)}}
-I'll begin by doing separation of variables to find a general solution with the following assumption:
+I'll begin by doing separation of variables to find a general solution, assuming it is of the form $u(x,t) = X(x)T(x)$:
 \begin{equation}
 \begin{aligned}
 u_x = T(t)X'(x)\\
@@ -115,7 +115,7 @@ B = 0\\
 X(L) = Asin(\lambda L) = 0\\
 \lambda L = n\pi \\
 \lambda = \frac{n\pi}{L}\\
-X(x) = X_n(x) = sin(\frac{n\pi x}{L})
+X(x) = X_n(x) = A_nsin(\frac{n\pi x}{L})
 \end{aligned}
 \end{equation}
 Moving on to the time dependent ODE:
@@ -180,7 +180,7 @@ B_n = \frac{4L}{n^2\pi^2}sin(\frac{n\pi}{2})
 \end{aligned}
 \end{equation}
 \end{tcolorbox}
-To apply the other initial condition we must note that we can move the differential operator inside the summation is a linear combination of well-behaved functions.
+To apply the other initial condition we must note that we can move the differential operator inside the summation because with respect to $t$ it is just a summation of well behaved sine and cosine functions. This could easily be shown by examples, but I am assuming no such demonstration is necessary.
 \begin{equation}
 \begin{aligned}
 u_t(x,t)= \frac{d}{dt}\Big{[}\sum^{\infty}_{n=1}\big{(}A_nsin(\omega_n t) + B_ncos(\omega_n t)\big{)}sin(\frac{n\pi x}{L})\Big{]}\\
@@ -188,7 +188,7 @@ u_t(x,t) = \sum^{\infty}_{n=1}A_n\omega_ncos(\omega_n t)sin(\frac{n\pi x}{L}) - 
 u_t(x,0) = \sum^{\infty}_{n=1}A_n\omega_nsin(\frac{n\pi x}{L})=0
 \end{aligned}
 \end{equation}
-Here we can observe that in order to satisfy the initial condition across all values of $x$, the arbitrary constant $A_n$ must be equal to zero. Thus we can now plug the values $A_n$ and $B_n$ from \textbf{(12)} above and the general solution from \textbf{(6)} to obtain a solution that satisfies all the Boundary and Initial Conditions:
+Here we can observe that in order to satisfy the initial condition across all values of $x$, the arbitrary constants $A_n$ must be equal to zero. Thus we can now plug the values $A_n$ and $B_n$ from \textbf{(12)} above and the general solution from \textbf{(6)} to obtain a solution that satisfies all the Boundary and Initial Conditions:
 \begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
 \begin{equation}
 \begin{aligned}
