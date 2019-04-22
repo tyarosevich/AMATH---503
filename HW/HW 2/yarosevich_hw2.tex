@@ -273,7 +273,15 @@ u(x,t) = \sum^{\infty}_{n=1}\Big{[}\frac{(-1)^n}{n^2}sin(2nt) - \frac{2(-1)^n}{n
 \end{equation}
 \end{tcolorbox}
 \section*{\textbf{(e)}}
-The TA asserted in Recitation on Friday 4/12 that with mixed BCs one still need only check $K<0$. However, it is easy to see in \textbf{(2)} above that if $K=0$ we would be applying a BC to get $X'(\pi) = C = 0$, and then similarly for $X(0) = D = 0$. $K>0$ would similarly still lead to a situation in which two exponentials with different powers were equal, once again requiring the trivial solution. We thus move forward with $K = -\lambda^2 < 0$. By ansatz, we then take the derivative and apply the BCs:
+The TA asserted in Recitation on Friday 4/12 that with mixed BCs one still need only check $K<0$. However, it is easy to see in \textbf{(2)} above that if $K=0$ we would be applying a BC to get $X'(\pi) = C = 0$, and then similarly for $X(0) = D = 0$. $K>0$ similarly still leads to a situation in which two exponentials with different powers were equal, once again requiring the trivial solution.
+\begin{equation}
+\begin{aligned}
+X(0) = A + B = 0\\
+B = - A
+X'(x) = \frac{Ae^{\sqrt{x}}}{2\sqrt{x}} + \frac{Ae^{-\sqrt{x}}}{2\sqrt{x}}
+\end{aligned}
+\end{equation}
+We can immediately see that X'(0) is not even defined, and so obviously cannot match any boundary conditions. We thus move forward with $K = -\lambda^2 < 0$. By ansatz, we then take the derivative and apply the BCs:
 \begin{equation}
 \begin{aligned}
 X(x) = Asin(\lambda x) + Bcos(\lambda x)\\
@@ -284,10 +292,196 @@ X'(\pi) = \lambda Acos(\lambda\pi) = 0\\
 \lambda = (n+\frac{1}{2})
 \end{aligned}
 \end{equation}
-Combining with the general solution for $T(t)$ that has been used ad nauseum we have:
+Combining with the general solution for $T(t)$ that has been used repeatedly above we have:
 \begin{equation}
 \begin{aligned}
 u(x,t) = \sum^{\infty}_{n=1}\Big{[}A_nsin((n+\frac{1}{2})t) + B_ncos((n+\frac{1}{2})t)\Big{]}sin((n+\frac{1}{2})x)
 \end{aligned}
 \end{equation}
+First I'll take the time derivative in order to eliminate a coefficient:
+\begin{equation}
+\begin{aligned}
+u_t(x,t) = \sum^{\infty}_{n=1}\Big{[}(n+\frac{1}{2})A_ncos((n+\frac{1}{2})t) - (n+\frac{1}{2})B_nsin((n+\frac{1}{2})t)\Big{]}sin((n+\frac{1}{2})x)\\
+u_t(x,0) = \sum_{n=1}^{\infty}(n+\frac{1}{2})A_nsin((n+\frac{1}{2})x) = 0
+\end{aligned}
+\end{equation}
+As in \textbf{(6)} above, $A_n = 0$. We now apply the other IC:
+\begin{equation}
+\begin{aligned}
+u(x,t) = \sum^{\infty}_{n=1}\Big{[}B_ncos((n+\frac{1}{2})t)\Big{]}sin((n+\frac{1}{2})x)\\
+u(x,0) = \sum_{n=1}^{\infty}B_nsin((n+\frac{1}{2})x)
+\end{aligned}
+\end{equation}
+This gives modes that we are not used to, so in accordance with what we learned in Recitation, I'll extend the domain to $0 < x < 2\pi$ and take the even extension of the initial condition, $f(x) = 1$, which is easy since it's the same function with the expanded domain. We then let $n+\frac{1}{2} = \frac{j}{2}$ with $J = 1, 3, 5, 7...$ and calculate the coefficient as follows:
+\begin{equation}
+\begin{aligned}
+u(x,0) = \sum_{j=1}^{\infty}C_jsin(\frac{jx}{2})\\
+C_j = \frac{1}{\pi}\int_0^{2\pi}sin(\frac{jx}{2})dx = \frac{1}{\pi}\Big{[}\frac{-2cos{\frac{jx}{2}}}{j}\Big{]}\Big{|}_0^{2\pi}\\
+C_j = \frac{1}{\pi}\Big{[}\frac{-2cos{\pi j}+2}{j}\Big{]}	
+\end{aligned}
+\end{equation}
+If $J$ were even, $C_j$ would be equal to zero, but we've defined it as odd only. So if $j$ is only odd and we substitute $n$ back in by observing that $j = 2n+1$ we have:
+\begin{equation}
+\begin{aligned}
+C_j = \frac{4}{\pi j}\\
+B_n = \frac{4}{\pi(2n+1)}
+\end{aligned}
+\end{equation}
+Substituting this back into the general solution we have the final solution satisfying the PDE and IC/BCs:
+\begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
+\begin{equation}
+\begin{aligned}
+u(x,t) = \frac{4}{\pi}\sum^{\infty}_{n=0}\frac{cos((n+\frac{1}{2})t)sin((n+\frac{1}{2})x)}{(2n+1)\pi}
+\end{aligned}
+\end{equation}
+\end{tcolorbox}
+\section*{\textbf{(f)}}
+Because this problem has entirely different BCs from the previous ones, namely Neumann Boundary Conditions, I started by checking $K=0$. Recovering the equation from \textbf{(2)} above we have:
+\begin{equation}
+\begin{aligned}
+X''(x) = 0\\
+X'(x) = C
+\end{aligned}
+\end{equation}
+We here we can apply either BC, and we should have:
+\begin{equation}
+\begin{aligned}
+X'(0) = X'(2\pi) = C = 0\\
+C = 0\\
+X'(x) = 0\\
+X(x) = D
+\end{aligned}
+\end{equation}
+Thus $X(x)$ is an arbitrary constant. Let $D=1$ and we'll move on to the $T(t)$ equation. From \textbf{(1)} we have the following equation, to which we'll apply the ICs:
+\begin{equation}
+\begin{aligned}
+\frac{T''(t)}{2T(t)} = 0\\
+T''(t) = 0\\
+T'(t) = C\\
+T'(0) = C = 1\\
+C = 1\\
+T(t) = t + D\\
+T(0) = 0 + D = -1\\
+D = -1
+\end{aligned}
+\end{equation}
+Thus we have already have a solution that satisfies the PDE and the Initial and Boundary Conditions. This worked out so easily with $K=0$ because the ICs were simple linear functions. \textbf{**Please Note} at the Thursday 4/18 Office Hours, Alex said that if we find a satisfactory solution with $K=0$, there is no need to continue on to check the other conditions for $K$. I would speculate that the others would either give trivial solutions, or the same solution? (I would check but I'm really busy...)
+\begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
+\begin{equation}
+\begin{aligned}
+u(x,t) = t - 1
+\end{aligned}
+\end{equation}
+\end{tcolorbox}
+\section*{\textbf{(g)}}
+Again to be thorough, I started by checking the conditions for $K$, starting with $K=0$. Recovering the results of \textbf{(31)} and \textbf{(32)} we have $X(x) = 1$ and:
+\begin{equation}
+\begin{aligned}
+T(t) = C\\
+T(0) = C = x(x-1)\\
+C \neq x(x-1)
+\end{aligned}
+\end{equation}
+So clearly $K=0$ will not let us satisfy the ICs. If $K>0$ we have the same situation as \textbf{(23)} and the function is not defined at the boundary conditions. Thus we move on again to $K = -\lambda^2<0$
+\begin{equation}
+\begin{aligned}
+X(x) = Asin(\lambda x) + Bcos(\lambda x)\\
+X'(x) = \lambda Acos(\lambda x) - B\lambda sin(\lambda x)\\
+X'(0) = \lambda A = 0\\
+\text{$\lambda =0$ is trivial, thus:}\\
+A = 0\\
+X'(1) = -B\lambda sin(\lambda) = 0\\
+\lambda = n\pi\\
+X_n(x) = \sum_{n=1}^{\infty}B_ncos(n\pi x)
+\end{aligned}
+\end{equation}
+Consolidating arbitrary constants we have the general solution:
+\begin{equation}
+\begin{aligned}
+\sum^{\infty}_{n=1}\Big{[}A_nsin(n\pi t) + B_ncos(n\pi t)\Big{]}sin(n\pi x)	
+\end{aligned}
+\end{equation}
+First I'll take the derivative to use one of the ICs to eliminate a coefficient:
+\begin{equation}
+\begin{aligned}
+u_t(x,t) = \sum^{\infty}_{n=1}\Big{[}\pi n A_ncos(n\pi t) - \pi n B_nsin(n\pi t)\Big{]}sin(n\pi x)\\
+u_t(x,0) = \sum_{n=1}^{\infty}n\pi A_ncos(n\pi x) =0\\
+A_n=0
+\end{aligned}
+\end{equation}
+Thus we have:
+\begin{equation}
+\begin{aligned}
+u(x,t) = \sum_{n=1}^{\infty}B_ncos(n\pi t)cos(n\pi x)
+\end{aligned}
+\end{equation}
+Here we have something different, a cosine series! Using the derivation of the formula from the notes, which makes use of the orthogonality of the basis, we have:
+\begin{equation}
+\begin{aligned}
+B_0 = \int_0^1x(1-x)dx = \int_0^1xdx - \int^1_0x^2dx\\
+B_0 = \Big{[}\frac{x^2}{2} \Big{]}\big{|}_0^1 - \Big{[}\frac{x^3}{3} \Big{]}\big{|}_0^1 = \frac{1}{2} - \frac{1}{3} = \frac{1}{6}
+\end{aligned}
+\end{equation}
+And for $B_n$ we have the following very long integral!
+\begin{equation}
+\begin{aligned}
+B_n = 2\int_0^1x(1-x)cos(n\pi x)dx=\int_0^1xcos(n\pi x)dx - \int_0^1x^2cos(n\pi x)dx
+\end{aligned}
+\end{equation}
+Starting with the first integral:
+\begin{equation}
+\begin{aligned}
+u = x \text{ , } du = 1\\
+dv = cos(n\pi x)\\
+v = \frac{sin(n\pi x)}{n\pi}\\
+\int xcos(n\pi x)dx = \frac{xsin(n\pi x)}{n\pi} - \int\frac{sin(n\pi x)}{n\pi}dx\\
+\int xcos(n\pi x)dx = \frac{xsin(n\pi x)}{n\pi} + \frac{cos(n\pi x)}{n^2\pi^2}\\
+\Big{[} \frac{xsin(n\pi x)}{n\pi} + \frac{cos(n\pi x)}{n^2\pi^2} \Big{]}\Big{|}_0^1 = \frac{cos(n\pi) - 1}{n^2\pi^2}
+\end{aligned}
+\end{equation}
+Moving on to the second integral we have:
+\begin{equation}
+\begin{aligned}
+u = x^2 \text{ , } du = 2x\\
+dv = cos(n\pi x)\\
+v = \frac{sin(n\pi x)}{n\pi}\\
+\int x^2cos(n\pi x)dx = \frac{x^2sin(n\pi x)}{n\pi} - \frac{2}{n\pi}\int xsin(n\pi x)dx
+\end{aligned}
+\end{equation}
+We now pause to solve this integral:
+\begin{equation}
+\begin{aligned}
+u = x \text{ , } du = 1\\
+dv = sin(n\pi x)\\
+v = -\frac{cos(n\pi x)}{n\pi}\\
+\int xsin(n\pi x)dx = -\frac{xcos(n\pi x)}{n\pi} + \int \frac{cos(n\pi x)}{n\pi}\\
+\int xsin(n\pi x)dx =  -\frac{xcos(n\pi x)}{n\pi} + \frac{sin(n\pi x)}{n^2\pi^2}
+\end{aligned}
+\end{equation}
+Plugging this back into the ongoing integral we get:
+\begin{equation}
+\begin{aligned}
+\int_0^1x^2cos(n\pi x)dx = \Big{[}\frac{x^2sin(n\pi x)}{n\pi} - \frac{2}{n\pi}\Big{[}\frac{-xcos(n\pi x)}{n\pi} + \frac{sin(n\pi x)}{n^2\pi^2} \Big{]}\Big{]}\Big{|}_0^1\\
+\int_0^1x^2cos(n\pi x)dx = \frac{cos(n\pi)}{n^2\pi^2}
+\end{aligned}
+\end{equation}
+Now combining this with the results from \textbf{(42)} we have:
+\begin{equation}
+\begin{aligned}
+B_n = 2 \Big{[}\frac{cos(n\pi) - 1}{n^2\pi^2} - \frac{cos(n\pi)}{n^2\pi^2}\Big{]}\\
+B_n = \frac{-2 -2cos(n\pi)}{n^2\pi^2}
+\end{aligned}
+\end{equation}
+Putting all this together, at last we have:
+\begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
+\begin{equation}
+\begin{aligned}
+u(x,t)=\frac{1}{6} - 2\sum_{n=1}^{\infty}\frac{1 +cos(n\pi)}{n^2\pi^2}cos(n\pi x)cos(n\pi t)
+\end{aligned}
+\end{equation}
+\end{tcolorbox}
+
+
+
+
 \end{document}
