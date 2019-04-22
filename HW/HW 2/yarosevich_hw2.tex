@@ -1,0 +1,201 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyfoot[C]{\thepage}
+\rhead{Yarosevich - 1064712}
+\usepackage{setspace}
+\usepackage{siunitx} % Provides the \SI{}{} and \si{} command for typesetting SI units
+\usepackage{graphicx} % Required for the inclusion of images
+\usepackage{amsmath} % Required for some math elements 
+\usepackage[export]{adjustbox} % loads also graphicx
+\usepackage{listings}
+\usepackage{setspace}
+\usepackage{matlab-prettifier}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+\usepackage{amsfonts}
+\usepackage{color}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{bm}
+\usepackage{esvect}
+\newcommand{\uveci}{{\bm{\hat{\textnormal{\bfseries\i}}}}}
+\newcommand{\uvecj}{{\bm{\hat{\textnormal{\bfseries\j}}}}}
+\DeclareRobustCommand{\uvec}[1]{{%
+  \ifcsname uvec#1\endcsname
+     \csname uvec#1\endcsname
+   \else
+    \bm{\hat{\mathbf{#1}}}%
+   \fi
+}}
+
+
+\newcommand{\R}{\mathbb{R}}
+
+\usepackage{xcolor}
+
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+  \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-4pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep}
+\titleformat{\section}[runin]
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}[runin]
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\renewcommand{\labelenumi}{\alph{enumi}.} % Make numbering in the enumerate environment by letter rather than number (e.g. section 6)
+
+%\usepackage{times} % Uncomment to use the Times New Roman font
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{AMATH 503: Homework 2 \\Due April, 22 2019 \\ ID: 1064712} % Title
+
+\author{Trent \textsc{Yarosevich}} % Author name
+
+\date{\today} % Date for the report
+
+\begin{document}
+\maketitle % Insert the title, author and date
+\setlength\parindent{1cm}
+
+\begin{center}
+\begin{tabular}{l r}
+%Date Performed: December 1, 2017 \\ % Date the experiment was performed
+Instructor: Ka-Kit Tung % Instructor/supervisor
+\end{tabular}
+\end{center}
+\doublespacing
+% If you wish to include an abstract, uncomment the lines below
+% \begin{abstract}
+% Abstract text
+% \end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	SECTION 1
+%----------------------------------------------------------------------------------------
+\section*{\textbf{(a)}}
+Assuming a solution of the form $u(x,t) = X(x)T(t)$ we have the following, with $K$ being an arbitrary constant.
+\begin{equation}
+\begin{aligned}
+\frac{T''(t)}{T(t)} = \frac{X''(x)}{X(x)} = K
+\end{aligned}
+\end{equation}
+If we suppose $K=0$ we quickly get a trivial soution:
+\begin{equation}
+\begin{aligned}
+X''(x) = 0\\
+X(x) = Ax + B\\
+X(0) = A(0) + B=0\\
+B=0
+X(\pi) = A(\pi) = 0\\
+A = 0
+\end{aligned}
+\end{equation}
+Similarly, if $K>0$ we have solutions of the form:
+\begin{equation}
+\begin{aligned}
+X(x) = Ae^{\sqrt{x}} + Be^{-\sqrt{x}}\\
+X(0) = A + B = 0\\
+B = -A\\
+X(\pi) = Ae^{\sqrt{\pi}} -Ae^{-\sqrt{\pi}} = 0\\
+A = 0
+\end{aligned}
+\end{equation}
+These trivial solutions have been covered quite a bit, but I include them here for later reference. We now proceed with $-\lambda^2 = K < 0$.
+\begin{equation}
+\begin{aligned}
+X(x) = Asin(\lambda x) + Bcos(\lambda x)\\
+X(0) = B = 0\\
+X(\pi) = Asin(\lambda \pi)\\
+\lambda\pi = \pi n\\
+\lambda = n\\
+X_n(x) = A_nsin(nx)\\
+\end{aligned}
+\end{equation}
+We combine this with the $T$ equation to get a general solution, consolidating the arbitrary constant from the $X$ equation, and then applying the ICs:
+\begin{equation}
+\begin{aligned}
+T_n(t) = A_nsin(nt) + B_ncos(nt)\\
+\sum^{\infty}_{n=1}\Big{[}A_nsin(nt) + B_ncos(nt)\Big{]}sin(nx)\\
+u(x,0) = \sum^{\infty}_{n=1}B_nsin(nx) = 1\\
+B_n = \frac{2}{\pi}\int_0^\pi sin(nx)dx = \frac{2}{\pi}\Big{[}\frac{-cos(nx)}{n}\Big{]}\Big{|}^\pi_0\\
+ B_n = \frac{2}{\pi}(\frac{-cos(n\pi) + 1)}{n})\\
+ B_n = \frac{2- 2(-1)^n}{\pi n}
+\end{aligned}
+\end{equation}
+To apply the other IC we need the time derivative:
+\begin{equation}
+\begin{aligned}
+u_t(x,t) = \sum_{n=1}^{\infty}\Big{[}A_nncos(nt) - B_nnsin(nt)\Big{]}sin(nx)\\
+u_t(x,0) =\sum_{n=1}^{\infty} A_nsin(nx) = 0
+\end{aligned}
+\end{equation}
+It has been asserted in class and office hours without proof that for a series of this form to be equal to zero, the coefficient must be zero, thus we have $A_n = 0$. Combining these we have the complete solution:
+\begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
+\begin{equation}
+\begin{aligned}
+u(x,t) = \frac{2}{\pi}\sum_{n=1}^{\infty}\frac{1 -(-1)^n}{n}cos(nt)(sin(nx)
+\end{aligned}
+\end{equation}
+\end{tcolorbox}
+\section*{\textbf{(b)}}
+We can observe from sections \textbf{(2)} and \textbf{(3)} above that the addition of the coefficient of $2$ in this problem will not change the triviality of solutions with $K=0$ and $K>0$, therefore we move directly to solutions with $K<0$. Given the formula,
+\begin{equation}
+\begin{aligned}
+\frac{T''(t)}{2T(t)} = \frac{X''(x)}{X(x)} = -\lambda^2
+\end{aligned}
+\end{equation}
+we can see that the $X(x)$ equation will be identical to \textbf{(4)}. We therefore move on to the $T(t)$ equation, again using the ansatz from the notes and the fact that $\lambda = n$:
+\begin{equation}
+\begin{aligned}
+T_n(t) = A_nsin(\sqrt{2}nt) + B_ncos(\sqrt{2}nt)
+\end{aligned}
+\end{equation}
+The resulting general solution before applying ICs is thus:
+\begin{equation}
+\begin{aligned}
+u(x,t) = \sum^{\infty}_{n=1}\Big{[}A_nsin(\sqrt{2}nt) + B_ncos(\sqrt{2}nt)\Big{]}sin(nx)
+\end{aligned}
+\end{equation}
+Now applying the first IC:
+\begin{equation}
+\begin{aligned}
+u(x,0) = \sum_{n=1}^{\infty}B_nsin(nx) = 0\\
+\end{aligned}
+\end{equation}
+For the reasons given near \textbf{(6)} above $B_n=0$, we now take the time derivative and apply the other IC:
+\begin{equation}
+\begin{aligned}
+u(x,t) = \sum_{n=1}^{\infty}A_nsin(\sqrt{2}nt)sin(nx)\\
+u_t(x,t) = \sum_{n=1}^{\infty}n\sqrt{2}A_ncos(\sqrt{2}nt)sin(nx)\\
+u_t(x,0) = \sum_{n=1}^{\infty}n\sqrt{2}A_nsin(nx) = 1\\
+n\sqrt{2}A_n = \frac{2}{\pi}\int^\pi_0sin(nx)dx
+\end{aligned}
+\end{equation}
+We can recover the result of this integral from \textbf{(5)} above, giving:
+\begin{equation}
+\begin{aligned}
+n\sqrt{2}A_n  = \frac{2- 2(-1)^n}{\pi n}\\
+A_n = \frac{2- 2(-1)^n}{\sqrt{2}\pi n^2}
+\end{aligned}
+\end{equation}
+Thus we have the full solution:
+\begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
+\begin{equation}
+\begin{aligned}
+u(x,t) = \frac{2}{\pi\sqrt{2}}\sum^{\infty}_{n=1}\Big{[}\frac{1-(-1)^n}{n^2}sin(\sqrt{2}nt)\Big{]}sin(nx)
+\end{aligned}
+\end{equation}
+\end{tcolorbox}
+
+\end{document}

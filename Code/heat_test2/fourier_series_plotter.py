@@ -4,13 +4,13 @@ import matplotlib.pyplot as plt
 
 
 
-x_0 = np.linspace(0, 1, 100) #the x mesh
-n = 10000 #number in the sum of the fourier series
+x_0 = np.linspace(0, np.pi, 50) #the x mesh
+n = 100 #number in the sum of the fourier series
 
 n_list = np.arange(1,n+1, 1) # an array of integers from 1 to n
 
 #An array of the fourier coefficients. The RHS will have to be updated for every series
-A_n_list = ( -2 * (-1)**(n_list) + 2) / (np.pi * n_list)
+A_n_list = (-2/n_list) *(-1)**(n_list)  #/ (n_list*n_list)
 
 # A python list to append to. The internet says this is faster than directly declaring
 # a matrix of arrays using numpy
@@ -40,5 +40,5 @@ u = np.sum(A_column*sin_matrix, 0)
 #u_0 = fsoln(n_list, A_n_list, 0)  # type: float
 
 plt.plot(x_0, u, 'r')
-plt.axis([0, 1, 0, 12])
+plt.axis([0, np.pi, 0, np.pi])
 plt.show()
