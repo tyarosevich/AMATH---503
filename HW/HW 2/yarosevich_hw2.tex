@@ -84,6 +84,9 @@ Instructor: Ka-Kit Tung % Instructor/supervisor
 %	SECTION 1
 %----------------------------------------------------------------------------------------
 \section*{\textbf{(a)}}
+\textbf{A few preliminaries:} I will frequently refer back to the results in section \textbf{(a)} as the work will be repeated throughout. I will also be using the ansatz solutions for ODEs from section 1 of the notes. Also please note that I will often use the fact that $cos(n\pi) = (-1)^n$.\\
+\\
+
 Assuming a solution of the form $u(x,t) = X(x)T(t)$ we have the following, with $K$ being an arbitrary constant.
 \begin{equation}
 \begin{aligned}
@@ -144,7 +147,9 @@ It has been asserted in class and office hours without proof that for a series o
 \begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
 \begin{equation}
 \begin{aligned}
-u(x,t) = \frac{2}{\pi}\sum_{n=1}^{\infty}\frac{1 -(-1)^n}{n}cos(nt)(sin(nx)
+u(x,t) = \frac{2}{\pi}\sum_{n=1}^{\infty}\frac{1 -(-1)^n}{n}cos(nt)(sin(nx)\\
+\text{Or perhaps more efficiently, let $j=2n+1$:}\\
+u(x,t) = \frac{2}{\pi}\sum_{j=0}^{\infty}\frac{1 -(-1)^j}{j}cos(jt)(sin(jx)\\
 \end{aligned}
 \end{equation}
 \end{tcolorbox}
@@ -193,9 +198,96 @@ Thus we have the full solution:
 \begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
 \begin{equation}
 \begin{aligned}
-u(x,t) = \frac{2}{\pi\sqrt{2}}\sum^{\infty}_{n=1}\Big{[}\frac{1-(-1)^n}{n^2}sin(\sqrt{2}nt)\Big{]}sin(nx)
+u(x,t) = \frac{2}{\pi\sqrt{2}}\sum^{\infty}_{n=1}\Big{[}\frac{1-(-1)^n}{n^2}sin(\sqrt{2}nt)\Big{]}sin(nx)\\
+\text{Or perhaps more efficiently let $j=2n+1$:}\\
+u(x,t) = \frac{2}{\pi\sqrt{2}}\sum^{\infty}_{j=1}\Big{[}\frac{1-(-1)^j}{j^2}sin(\sqrt{2}jt)\Big{]}sin(jx)\\
 \end{aligned}
 \end{equation}
 \end{tcolorbox}
-
+\section*{\textbf{(c)}}
+For the same reasons stated above in \textbf{(8)} and \textbf{(9)} we can move directly to the general solution, simply substituting $\sqrt{3}$ in place of $\sqrt{2}$:
+\begin{equation}
+\begin{aligned}
+u(x,t) = \sum^{\infty}_{n=1}\Big{[}A_nsin(\sqrt{3}nt) + B_ncos(\sqrt{3}nt)\Big{]}sin(nx)
+\end{aligned}
+\end{equation}
+We will first take the time derivative in order to apply an IC that is likely to eliminate a coefficient:
+\begin{equation}
+\begin{aligned}
+u_t(x,t) = \sum^{\infty}_{n=1}\Big{[}n\sqrt{3}A_ncos(\sqrt{3}nt) - n\sqrt{3}B_nsin(\sqrt{3}nt)\Big{]}sin(nx)\\
+u_t(x,0) = \sum_{n=1}^{\infty}n\sqrt{3}A_nsin(nx) = 0
+\end{aligned}
+\end{equation}
+Again, for the reasons state in \textbf{(6)} $A_n = 0$. Making this substitution, we then apply the other IC:
+\begin{equation}
+\begin{aligned}
+u(x,t) = \sum_{n=1}^{\infty}B_ncos(\sqrt{3}nt)sin(nx)\\
+u(x,0) = \sum_{n=1}^{\infty}B_nsin(nx) = sin^3(x)
+\end{aligned}
+\end{equation}	
+Rather than using an integral to determine $B_n$ here, we can simply observe that the objective is to obtain a sine series for $sin^3(x)$. By the triple-angle formula we can see that $sin^3x = \frac{3}{4}sinx - \frac{1}{4}sin(3x)$. It is immediately clear that this \textit{is} a sine series with only two terms at $n=1$ and $n=3$ with corresponding coefficients $B_1 = \frac{3}{4}$ and $B_3 = -\frac{1}{4}$. Since all other terms are zero, the resulting function is quite simple, since the only values remaining from the sum are n=1 and n=3. 
+\begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
+\begin{equation}
+\begin{aligned}
+u(x,t) = \frac{3}{4}cos(\sqrt{3}t)sin(x) - \frac{1}{4}cos(3\sqrt{3}t)sin(3x)
+\end{aligned}
+\end{equation}
+\end{tcolorbox}
+\section*{\textbf{(d)}}
+As in \textbf{(15)} above, we can move directly to the following, substituting $\sqrt{4} = 2$ for $\sqrt{3}$:
+\begin{equation}
+\begin{aligned}
+u(x,t) = \sum^{\infty}_{n=1}\Big{[}A_nsin(2nt) + B_ncos(2nt)\Big{]}sin(nx)
+\end{aligned}
+\end{equation}
+Applying the first IC we have:
+\begin{equation}
+\begin{aligned}
+u(x,0)=\sum_{n=1}^{\infty}B_nsin(nx) = x\\
+B_n = \frac{2}{\pi}\int_0^\pi xsin(x)dx\\
+u = x \text{ , } du = 1\\
+dv = sin(nx)\\
+v = \frac{-1}{n}cos(nx)\\
+uv - \int vdu = \frac{-x cos(nx)}{n} + \frac{sin(nx)}{n^2}\\
+\Big{[}\frac{-x cos(nx)}{n} + \frac{sin(nx)}{n^2}\Big{]}\Big{|}^\pi_0 = (\frac{-\pi cos(n\pi)}{n})\\
+B_n = \frac{2}{\pi}(\frac{-\pi (-1)^n}{n}) = \frac{-2(-1)^n}{n}
+\end{aligned}
+\end{equation}
+To apply the other IC we take the time derivative (note I will retain the arbitrary coefficients for brevity):
+\begin{equation}
+\begin{aligned}
+u_t(x,t)= \sum^{\infty}_{n=1}\Big{[}2nA_ncos(2nt) - 2nB_ncsin(2nt)\Big{]}sin(nx)\\
+u_t(x,0) = \sum_{n=1}^{\infty}2nA_nsin(nx) = -x\\
+\text{Recoving the integral above:}\\
+-2nA_n = \frac{2}{\pi}\int_0^\pi xsin(x)dx\\
+-2nA_n = \frac{-2(-1)^n}{n}\\
+A_n = \frac{(-1)^n}{n^2}
+\end{aligned}
+\end{equation}
+Substituting our coefficients, we arrive at the full solution:
+\begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
+\begin{equation}
+\begin{aligned}
+u(x,t) = \sum^{\infty}_{n=1}\Big{[}\frac{(-1)^n}{n^2}sin(2nt) - \frac{2(-1)^n}{n}cos(2nt)\Big{]}sin(nx)
+\end{aligned}
+\end{equation}
+\end{tcolorbox}
+\section*{\textbf{(e)}}
+The TA asserted in Recitation on Friday 4/12 that with mixed BCs one still need only check $K<0$. However, it is easy to see in \textbf{(2)} above that if $K=0$ we would be applying a BC to get $X'(\pi) = C = 0$, and then similarly for $X(0) = D = 0$. $K>0$ would similarly still lead to a situation in which two exponentials with different powers were equal, once again requiring the trivial solution. We thus move forward with $K = -\lambda^2 < 0$. By ansatz, we then take the derivative and apply the BCs:
+\begin{equation}
+\begin{aligned}
+X(x) = Asin(\lambda x) + Bcos(\lambda x)\\
+X(0) = B_n = 0\\
+X'(x) = \lambda Acos(\lambda x)\\
+X'(\pi) = \lambda Acos(\lambda\pi) = 0\\
+\lambda\pi = (n+\frac{1}{2})\pi\\
+\lambda = (n+\frac{1}{2})
+\end{aligned}
+\end{equation}
+Combining with the general solution for $T(t)$ that has been used ad nauseum we have:
+\begin{equation}
+\begin{aligned}
+u(x,t) = \sum^{\infty}_{n=1}\Big{[}A_nsin((n+\frac{1}{2})t) + B_ncos((n+\frac{1}{2})t)\Big{]}sin((n+\frac{1}{2})x)
+\end{aligned}
+\end{equation}
 \end{document}
