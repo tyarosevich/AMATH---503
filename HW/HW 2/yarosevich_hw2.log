@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500) (preloaded format=pdflatex 2017.12.5)  22 APR 2019 00:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500) (preloaded format=pdflatex 2017.12.5)  22 APR 2019 11:40
 entering extended mode
 **"C:/Users/zennsunni/Dropbox (Personal)/School Stuff/AMATH 503/AMATH---503/HW/
 HW 2/yarosevich_hw2.tex"
@@ -1286,7 +1286,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 87--89
 
 {C:/Users/zennsunni/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
 [2] [3] [4] [5] [6] [7]
-Overfull \hbox (8.91524pt too wide) detected at line 307
+Overfull \hbox (8.91524pt too wide) detected at line 303
 [][]
  []
 
@@ -1297,13 +1297,13 @@ See the caption package documentation for explanation.
 
 [14] (yarosevich_hw2.aux) ) 
 Here is how much of TeX's memory you used:
- 31524 strings out of 493312
- 676617 string characters out of 3136295
- 715939 words of memory out of 3000000
- 34587 multiletter control sequences out of 15000+200000
+ 31521 strings out of 493312
+ 676546 string characters out of 3136295
+ 715941 words of memory out of 3000000
+ 34584 multiletter control sequences out of 15000+200000
  547377 words of font info for 90 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 63i,15n,101p,10508b,421s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 63i,14n,101p,10508b,421s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/publi
 c/amsfonts/cm/cmbx10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/
 amsfonts/cm/cmbx12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/am
@@ -1317,7 +1317,7 @@ mr12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr1
 b><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:
 /Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on yarosevich_hw2.pdf (14 pages, 190237 bytes).
+Output written on yarosevich_hw2.pdf (14 pages, 189511 bytes).
 PDF statistics:
  139 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

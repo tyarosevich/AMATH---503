@@ -148,8 +148,6 @@ It has been asserted in class and office hours without proof that for a series o
 \begin{equation}
 \begin{aligned}
 u(x,t) = \frac{2}{\pi}\sum_{n=1}^{\infty}\frac{1 -(-1)^n}{n}cos(nt)(sin(nx)\\
-\text{Or perhaps more efficiently, let $j=2n+1$:}\\
-u(x,t) = \frac{2}{\pi}\sum_{j=0}^{\infty}\frac{1 -(-1)^j}{j}cos(jt)(sin(jx)\\
 \end{aligned}
 \end{equation}
 \end{tcolorbox}
@@ -198,9 +196,7 @@ Thus we have the full solution:
 \begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
 \begin{equation}
 \begin{aligned}
-u(x,t) = \frac{2}{\pi\sqrt{2}}\sum^{\infty}_{n=1}\Big{[}\frac{1-(-1)^n}{n^2}sin(\sqrt{2}nt)\Big{]}sin(nx)\\
-\text{Or perhaps more efficiently let $j=2n+1$:}\\
-u(x,t) = \frac{2}{\pi\sqrt{2}}\sum^{\infty}_{j=1}\Big{[}\frac{1-(-1)^j}{j^2}sin(\sqrt{2}jt)\Big{]}sin(jx)\\
+u(x,t) = \frac{\sqrt{2}}\pi\sum^{\infty}_{n=1}\Big{[}\frac{1-(-1)^n}{n^2}sin(\sqrt{2}nt)\Big{]}sin(nx)\\
 \end{aligned}
 \end{equation}
 \end{tcolorbox}
@@ -312,15 +308,14 @@ u(x,t) = \sum^{\infty}_{n=1}\Big{[}B_ncos((n+\frac{1}{2})t)\Big{]}sin((n+\frac{1
 u(x,0) = \sum_{n=1}^{\infty}B_nsin((n+\frac{1}{2})x)
 \end{aligned}
 \end{equation}
-This gives modes that we are not used to, so in accordance with what we learned in Recitation, I'll extend the domain to $0 < x < 2\pi$ and take the even extension of the initial condition, $f(x) = 1$, which is easy since it's the same function with the expanded domain. We then let $n+\frac{1}{2} = \frac{j}{2}$ with $J = 1, 3, 5, 7...$ and calculate the coefficient as follows:
+This gives modes that we are not used to, so in accordance with what we learned in Recitation, I'll extend the domain to $0 < x < 2\pi$ and take the even extension of the initial condition, $f(x) = 1$, which is easy since it's the same function with the expanded domain. We then let $n+\frac{1}{2} = \frac{j}{2}$ with $j = 1, 3, 5, 7...$ and calculate the coefficient as follows:
 \begin{equation}
 \begin{aligned}
-u(x,0) = \sum_{j=1}^{\infty}C_jsin(\frac{jx}{2})\\
 C_j = \frac{1}{\pi}\int_0^{2\pi}sin(\frac{jx}{2})dx = \frac{1}{\pi}\Big{[}\frac{-2cos{\frac{jx}{2}}}{j}\Big{]}\Big{|}_0^{2\pi}\\
 C_j = \frac{1}{\pi}\Big{[}\frac{-2cos{\pi j}+2}{j}\Big{]}	
 \end{aligned}
 \end{equation}
-If $J$ were even, $C_j$ would be equal to zero, but we've defined it as odd only. So if $j$ is only odd and we substitute $n$ back in by observing that $j = 2n+1$ we have:
+If $j$ were even, $C_j$ would be equal to zero, but we've defined it as odd only. So if $j$ is only odd and we substitute $n$ back in by observing that $j = 2n+1$ we have:
 \begin{equation}
 \begin{aligned}
 C_j = \frac{4}{\pi j}\\
@@ -365,7 +360,7 @@ T(0) = 0 + D = -1\\
 D = -1
 \end{aligned}
 \end{equation}
-Thus we have already have a solution that satisfies the PDE and the Initial and Boundary Conditions. This worked out so easily with $K=0$ because the ICs were simple linear functions. \textbf{**Please Note} at the Thursday 4/18 Office Hours, Alex said that if we find a satisfactory solution with $K=0$, there is no need to continue on to check the other conditions for $K$. I would speculate that the others would either give trivial solutions, or the same solution? (I would check but I'm really busy...)
+Thus we have already have a solution that satisfies the PDE and the Initial and Boundary Conditions. This worked out so easily with $K=0$ because the ICs were simple linear functions. \textbf{**Please Note} at the Thursday 4/18 Office Hours, Alex said that if we find a satisfactory solution with $K=0$, there is no need to continue on to check the other conditions for $K$. I would speculate that the others would either give trivial solutions, or the same solution? (I would check but I'm really busy...). The final answer, while simple, still satisfies the PDE, ICs and BCs:
 \begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
 \begin{equation}
 \begin{aligned}
@@ -425,7 +420,7 @@ B_0 = \Big{[}\frac{x^2}{2} \Big{]}\big{|}_0^1 - \Big{[}\frac{x^3}{3} \Big{]}\big
 And for $B_n$ we have the following very long integral!
 \begin{equation}
 \begin{aligned}
-B_n = 2\int_0^1x(1-x)cos(n\pi x)dx=\int_0^1xcos(n\pi x)dx - \int_0^1x^2cos(n\pi x)dx
+B_n = 2\int_0^1x(1-x)cos(n\pi x)dx=2\int_0^1xcos(n\pi x)dx - 2\int_0^1x^2cos(n\pi x)dx
 \end{aligned}
 \end{equation}
 Starting with the first integral:
@@ -462,13 +457,13 @@ Plugging this back into the ongoing integral we get:
 \begin{equation}
 \begin{aligned}
 \int_0^1x^2cos(n\pi x)dx = \Big{[}\frac{x^2sin(n\pi x)}{n\pi} - \frac{2}{n\pi}\Big{[}\frac{-xcos(n\pi x)}{n\pi} + \frac{sin(n\pi x)}{n^2\pi^2} \Big{]}\Big{]}\Big{|}_0^1\\
-\int_0^1x^2cos(n\pi x)dx = \frac{cos(n\pi)}{n^2\pi^2}
+\int_0^1x^2cos(n\pi x)dx = \frac{2cos(n\pi)}{n^2\pi^2}
 \end{aligned}
 \end{equation}
 Now combining this with the results from \textbf{(42)} we have:
 \begin{equation}
 \begin{aligned}
-B_n = 2 \Big{[}\frac{cos(n\pi) - 1}{n^2\pi^2} - \frac{cos(n\pi)}{n^2\pi^2}\Big{]}\\
+B_n = 2 \Big{[}\frac{cos(n\pi) - 1}{n^2\pi^2} - \frac{2cos(n\pi)}{n^2\pi^2}\Big{]}\\
 B_n = \frac{-2 -2cos(n\pi)}{n^2\pi^2}
 \end{aligned}
 \end{equation}
