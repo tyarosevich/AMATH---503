@@ -163,5 +163,87 @@ We can also observe that the even modes are zero, substituting $n = 2k-1$ and de
 \end{aligned}
 \end{equation}
 This is the sine series for $f(x) =1$ in the class notes, section (6.4.1). This is actually to be expected, since we know the derivative of $|x|$ is -1 from $-\infty < x < 0$ and 1 from $0<x<\infty$. Furthermore, we know that a fourier sine series for a non-periodic function will only be accurate in the domain $0 < x< L$, and because it's an odd function, will be reflected accordingly outside that domain. Thus we would expect the Fourier series for the derivative of $|x|$ to be accurate from $-L < x < L$ and be $2L$ periodic outside this. The resulting function would be the sine series of $f(x) = 1$ and that is precisely what we got.
+\section*{\textbf{(2)}}
+We first define the fourier transforms in the different dimensions:
+\begin{equation}
+\begin{aligned}
+\mathcal{F}_1[u(x,y,z,t)] = \int_{-\infty}^\infty u(x,y,z,t,)e^{i\omega_1 x}dx\\
+\mathcal{F}_2[u(x,y,z,t)] = \int_{-\infty}^\infty u(x,y,z,t,)e^{i\omega_2 y}dy\\
+\mathcal{F}_3[u(x,y,z,t)] = \int_{-\infty}^\infty u(x,y,z,t,)e^{i\omega_3 z}dz\\
+\end{aligned}
+\end{equation}
+We can then fully define $u$ in fourier space:
+\begin{equation}
+\begin{aligned}
+\mathcal{F}_1[\mathcal{F}_2[\mathcal{F}_3[u(x,y,z,t)]]] = U(\omega_1, \omega_2, \omega_3, t)
+\end{aligned}
+\end{equation}
+Now defining the terms in the PDE, in particular using the definition of a derivative in Fourier space from the notes:
+\begin{equation}
+\begin{aligned}
+\mathcal{F}_1\mathcal{F}_2\mathcal{F}_3[u_t] = \frac{d}{dt}U(\omega_1, \omega_2, \omega_3, t)\\
+\mathcal{F}_1\mathcal{F}_2\mathcal{F}_3[u_xx] = (i\omega_1)^2 U(\omega_1, \omega_2, \omega_3, t)\\
+\mathcal{F}_1\mathcal{F}_2\mathcal{F}_3[u_yy] = (i\omega_2)^2 U(\omega_1, \omega_2, \omega_3, t)\\
+\mathcal{F}_1\mathcal{F}_2\mathcal{F}_3[u_zz] = (i\omega_3)^2 U(\omega_1, \omega_2, \omega_3, t)\\
+\end{aligned}
+\end{equation}
+We can now write out the full PDE in Fourier space:
+\begin{equation}
+\begin{aligned}
+\frac{d}{dt}U = -D(\omega_1^2 + \omega_2^2 + \omega_3^2)U
+\end{aligned}
+\end{equation}
+We then separate variables and integrate with respect to $t$, letting $D = \alpha^2$:
+\begin{equation}
+\begin{aligned}
+\frac{dU}{U} = -\alpha^2(\omega_1^2 + \omega_2^2 + \omega_3^2)dt\\
+lnU = -\alpha^2(\omega_1^2 + \omega_2^2 + \omega_3^2)t+ C\\
+U = Ae^{-\alpha^2(\omega_1^2 + \omega_2^2 + \omega_3^2)t}
+\end{aligned}
+\end{equation}
+Applying the initial condition, we have:
+\begin{equation}
+\begin{aligned}
+A = U(\omega_1, \omega_2, \omega_3, 0)\\
+U(\omega_1, \omega_2, \omega_3, 0) = \mathcal{F}_1\mathcal{F}_2\mathcal{F}_3\delta (x)\delta (y) \delta(z)
+\end{aligned}
+\end{equation}
+As we learned in class, the integral across a delta function is equal to 1 because it is summing the area under an infinitely small Riemann rectangle. Thus we have:
+\begin{equation}
+\begin{aligned}
+U = e^{-\alpha^2(\omega_1^2 + \omega_2^2 + \omega_3^2)t}\\
+\end{aligned}
+\end{equation}
+To apply the reverse transform, we can split $U$ up into three exponentials and apply the reverse transform to each one:
+\begin{equation}
+\begin{aligned}
+U = e^{-\alpha^2\omega_1^2t}e^{-\alpha^2\omega_2^2t} e^{-\alpha^2\omega_3^2t}\\
+u(x,y,z,t) &= \frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-\alpha^2\omega_1^2t}e^{i\omega_1 x}d\omega_1\\
+&*\frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-\alpha^2\omega_2^2t}e^{i\omega_1 y}d\omega_2\\
+&*\frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-\alpha^2\omega_3^2t}e^{i\omega_1 z}d\omega_3
+\end{aligned}
+\end{equation}
+These integrals can be re-written in the form:
+\begin{equation}
+\begin{aligned}
+\frac{1}{2\pi}\int_{-\infty}^{\infty}e^{-\alpha^2\omega_1^2t + i\omega_1 x}d\omega_1
+\end{aligned}
+\end{equation}
+Using the general formula for Euler's Integral, taken from the class notes section (8.2), and noting that $t$ is being treated as a constant here since we are integrating in respect to the omegas. The formula is as follows:
+\begin{equation}
+\begin{aligned}
+\int_{-\infty}^{\infty}e^{p^2\omega^2 \pm q\omega}d\omega = \frac{\sqrt{\pi}}{p}e^{\frac{q^2}{4p^2}}
+\end{aligned}
+\end{equation}
+Applying this to each integral, we get the answer:
+\begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
+\begin{equation}
+\begin{aligned}
+u(x,y,z,t) = (\frac{1}{2\pi})^3(\frac{\sqrt{\pi}}{\alpha\sqrt{t}})^3e^{\frac{-x^2}{4\alpha^2 t}}e^{\frac{-y^2}{4\alpha^2 t}}e^{\frac{-z^2}{4\alpha^2 t}}\\
+u(x,y,z,t) = \frac{1}{8\pi^3})(\frac{\pi^{\frac{3}{2}}}{\alpha^3t^{\frac{3}{2}}})e^{-\frac{(x^2+y^2+z^2)}{4\alpha^2 t}}\\
+u(x,y,z,t) = \frac{1}{8\alpha^3 t^{\frac{3}{2}}\pi^{\frac{3}{2}}}e^{-\frac{(x^2+y^2+z^2)}{4\alpha^2 t}}\\
+\end{aligned}
+\end{equation}
+\end{tcolorbox}
 
 \end{document}
