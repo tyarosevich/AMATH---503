@@ -146,23 +146,36 @@ Using Euler's Formula we can rewrite the exponential above in the following way:
 e^{-\frac{in\pi x}{2}} = cos(\frac{n\pi x}{2}) - isin(\frac{n\pi x}{2})
 \end{aligned}
 \end{equation}
-If we observe that $sin$ is an odd function, it follows that $isin(\frac{-n\pi x}{2}) = - isin(\frac{n\pi x}{2})$. This means that when $n<0$, all the $sin$ values in the sum will cancel with their corresponding values from $n>0$, for example when $n=1$ we have  $- isin(\frac{\pi x}{2})$ and when $n=-1$ we have   $isin(\frac{n\pi x}{2})$.\\
+If we observe that $sin$ is an odd function, it follows that $isin(\frac{-n\pi x}{2}) = - isin(\frac{n\pi x}{2})$. Additionally, the $n$ term in the divisor is squared, so it is no different for $\pm n$. This means that when $n<0$, all the $sin$ values in the sum will cancel with their corresponding values from $n>0$, for example when $n=1$ we have  $- isin(\frac{\pi x}{2})$ and when $n=-1$ we have   $isin(\frac{n\pi x}{2})$.\\
+Similarly, we can observe that cosine is an even function and $cos(nx) = cos(-nx)$. Thus we can change our sum to be from $0< n < \infty$ and multiply the sum by 2, noting that $n=0$ is accounted for already from c_0.
 \\
-We can also observe that the even modes are zero, substituting $n = 2k-1$ and define our sum with $k = 1, 2, 3...$. This means $c_n = \frac{-4}{n^2\pi^2}$ as well. The resulting cosine series is:
+Lastly, we can also observe that the even modes are zero, substituting $n = 2k-1$ and define our sum with $k = 1, 2, 3...$. This means $c_n = \frac{-4}{n^2\pi^2}$ as well. The resulting cosine series after discarding the sines, changing the range of $n$, eliminating even modes, and multiplying by 2, is:
 \begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
 \begin{equation}
 \begin{aligned}
-|x| = 1 - \frac{4}{\pi^2}\sum_{k=1}^{\infty}\frac{cos(\frac{(2k-1)\pi x}{2})}{(2k-1)^2}
+|x| = 1 - \frac{8}{\pi^2}\sum_{k=1}^{\infty}\frac{cos(\frac{(2k-1)\pi x}{2})}{(2k-1)^2}
 \end{aligned}
 \end{equation}
 \end{tcolorbox}
 \subsection*{\textbf{(c)}}
 \begin{equation}
 \begin{aligned}
-\frac{d}{dx}[1 - \frac{4}{\pi^2}\sum_{k=1}^{\infty}\frac{cos(\frac{(2k-1)\pi x}{2})}{(2k-1)^2}] = \frac{2}{\pi}\sum_{n=-\infty}^{\infty}\frac{sin(\frac{n\pi x}{2})}{2k-1}
+\frac{d}{dx}[1 - \frac{8}{\pi^2}\sum_{k=1}^{\infty}\frac{cos(\frac{(2k-1)\pi x}{2})}{(2k-1)^2}] = \frac{4}{\pi}\sum_{k=1}^{\infty}\frac{sin(\frac{n\pi x}{2})}{2k-1}
 \end{aligned}
 \end{equation}
-This is the sine series for $f(x) =1$ in the class notes, section (6.4.1). This is actually to be expected, since we know the derivative of $|x|$ is -1 from $-\infty < x < 0$ and 1 from $0<x<\infty$. Furthermore, we know that a fourier sine series for a non-periodic function will only be accurate in the domain $0 < x< L$, and because it's an odd function, will be reflected accordingly outside that domain. Thus we would expect the Fourier series for the derivative of $|x|$ to be accurate from $-L < x < L$ and be $2L$ periodic outside this. The resulting function would be the sine series of $f(x) = 1$ and that is precisely what we got.
+This is the sine series for $f(x) =1$ in a domain of $0<x<2$. To show this, we simply observe that if $f(x) = 1$, our sine series coefficient is:
+\begin{equation}
+ \begin{aligned}
+ a_n = \int_0^2 sin(\frac{n\pi x}{2})\\
+ a_n = \Big{[}-\frac{2}{n\pi}cos(\frac{n\pi x}{2}) \Big{]}\Big{|}_0^2\\
+ a_n = \frac{2 - 2(-1)^n}{n\pi}\\
+ \text{Even modes are zero, thus:}\\
+ f(x) = \sum_{n=1}^{\infty}\frac{4}{n\pi}sin(\frac{n\pi x}{2})\\
+ f(x) = \frac{4}{\pi}\sum_{k=1}^{\infty}\frac{sin(\frac{(2k-1)\pi x}{2})}{2k-1}
+ \end{aligned}
+ \end{equation} 
+
+This is the same as the result of taking our derivative, which makes sense since we know the derivative of $|x|$ is -1 from $-\infty < x < 0$ and 1 from $0<x<\infty$. Furthermore, we know that a fourier sine series for a non-periodic function will only be accurate in the domain $0 < x< L$, and because it's an odd function, will be reflected accordingly outside that domain. Thus we would expect the Fourier series for the derivative of $|x|$ to be accurate from $-L < x < L$ and be $2L$ periodic outside this. The resulting function would be the sine series of $f(x) = 1$ and that is precisely what we got.
 \section*{\textbf{(2)}}
 We first define the fourier transforms in the different dimensions:
 \begin{equation}
@@ -208,7 +221,7 @@ A = U(\omega_1, \omega_2, \omega_3, 0)\\
 U(\omega_1, \omega_2, \omega_3, 0) = \mathcal{F}_1\mathcal{F}_2\mathcal{F}_3\delta (x)\delta (y) \delta(z)
 \end{aligned}
 \end{equation}
-As we learned in class, the integral across a delta function is equal to 1 because it is summing the area under an infinitely small Riemann rectangle. Thus we have:
+As we learned in class, the integral across a delta function is equal to 1 because it is summing the area under an infinitely narrow Riemann rectangle with infinite height. Thus we have:
 \begin{equation}
 \begin{aligned}
 U = e^{-\alpha^2(\omega_1^2 + \omega_2^2 + \omega_3^2)t}\\
