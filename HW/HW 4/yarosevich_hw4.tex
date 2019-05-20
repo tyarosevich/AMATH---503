@@ -102,7 +102,7 @@ We proceed as usual, noting that these ODEs must be equal to a constant, which w
 T(t) = Asin(c\lambda t) + Bcos(c\lambda t)
 \end{aligned}
 \end{equation}
-From this equation we can then infer that the frequency is given by $\omega = c\lambda$, however this wavenumber $\lambda$ is determined by the spatial qualities of the cavity. Thus we move on to doing separation of variables of the spatial component, noting that we must apply the laplacian in cylindrical coordinates:
+From this equation we can then infer that the frequency is given by $\omega = c\lambda$, however this wavenumber $\lambda$ is determined by the spatial qualities of the cavity. Thus we move on to doing separation of variables of the spatial component, noting that we must apply the laplacian in cylindrical coordinates with no angular dependence:
 \begin{equation}
 \begin{aligned}
 u(r,z) = R(r)Z(z)\\
@@ -113,14 +113,15 @@ We now assume the $Z$ component is equal to some constant $-b^2$, giving the fam
 \begin{equation}
 \begin{aligned}
 \frac{Z''(z)}{Z(z)} = -b^2\\
-b = \frac{l\pi}{L}\\
-Z(z) = A_lsin(\frac{l\pi z}{L}) + B_lcos(\frac{l \pi z}{L})\\
+Z(z) = A_lsin(bz) + B_lcos(bz)\\
 Z(0) = 0 = B_l\\
-Z(L) = 0 = A_lsin(l\pi)\\
+Z(L) = 0 = A_lsin(bL)\\
+bL = l\pi\\
+b = \frac{l\pi}{L}\\
 l = 1,2,3...
 \end{aligned}
 \end{equation}
-Applying this result we have the following:
+Now that we know the value of $b$ (or $b_l$), we have the following:
 \begin{equation}
 \begin{aligned}
 \frac{(rR'(r))'}{rR} +(\lambda^2 - b^2) = 0\\ 
@@ -142,6 +143,98 @@ y(x) = AJ_m(x)\\
 R(r) = AJ_m(r\sqrt{\lambda^2 - b^2})
 \end{aligned}
 \end{equation}
-Applying the other boundary condition of 
+Applying the other boundary condition that $\Psi = 0$ at $r=a$, we require $R(a) = AJ_m(a\sqrt{\lambda^2 - b^2}) = 0$. The zeros $z_{mn}$ of of the Bessel function are tabulated on page 146 of the notes, thus we must require that $a\sqrt{\lambda^2 - b ^2} = z_{mn}$. Solving for $\lambda^2$:
+\begin{equation}
+\begin{aligned}
+a\sqrt{\lambda^2 - b ^2} = z_m\\
+(\frac{z_{mn}}{a})^2 = \lambda^2 - b^2\\
+\lambda^2 = (\frac{z_{mn}}{a})^2 + b^2
+\end{aligned}
+\end{equation}
+We can now refer back to the fact that $\omega=c\lambda$, and substitute in the value for $b$, giving the following:
+\begin{equation}
+\begin{aligned}
+\lambda = \sqrt{(\frac{z_{mn}}{a} + (\frac{l\pi}{L})^2}\\
+\omega = c\sqrt{(\frac{z_{mn}}{a} + (\frac{l\pi}{L})^2}\\
+\end{aligned}
+\end{equation}
+Plugging in our values in the prompt, and noting that $1cm^2 = .0001m^2$, we have:
+\begin{equation}
+\begin{aligned}
+w_{nl} = \frac{300m}{s}\sqrt{(\frac{z_{mn}^2}{.0001m^2}) + (\frac{l^2\pi^2}{.5m^2})}\\
+\end{aligned}
+\end{equation}
+Now, it is immediately clear that $z_{nm}$ contributes far more to the frequency than the $l$ term, since it is divided by a number three orders of magnitude smaller, thus the lowest frequencies will be given by $z_{1,0}$ and $l=1,2,3$. Dividing by $2\pi$ to convert to Hz, we have:
+\begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
+\begin{equation}
+\begin{aligned}
+w_{1,1} = 72.169\frac{rad}{sec} \to 11.486 \text{ kHz}\\
+w_{1,2} = 72.243\frac{rad}{sec} \to 11.498 \text{ kHz}\\
+w_{1,3} = 72.366\frac{rad}{sec} \to 11.517 \text{ kHz}\\
+\end{aligned}
+\end{equation}
+\end{tcolorbox}
+\section*{\textbf{(2)}}
+To find the energy levels we have to solve for the eigenvalues in the spatial component, i.e. we need to solve a spherical Bessel's equation. Again we proceed by separation of variables, noting that there is no angular component, and substitute our assumed form into the PDE:
+\begin{equation}
+\begin{aligned}
+\Psi = T(t)u(r)\\
+\frac{ihT'(t)}{T(t)} = \frac{-h^2}{2\mu}\frac{\nabla^2u}{u} = E\\
+T(t) = T(0)e^{-\frac{i}{h}t}\\
+\end{aligned}
+\end{equation}
+$E$ is interpreted as the energy of the electron, as noted in section 11.2 of the notes, since $\frac{E}{h}$ is the frequency of the electron and $h$ times the frequency is the energy of the electron. Moving on to the spatial component we have the laplacian in spherical coordinates with no angular dependence, plus some constants $\lambda^2 = \frac{2\mu E}{h^2}$, giving:
+\begin{equation}
+\begin{aligned}
+\nabla^2u = \frac{1}{r^2}\frac{d}{dr}(r^2\frac{d}{dr}u) = -\lambda^2u\\
+u(r) = R(r)\\
+R''(r) + \frac{2R'(r)}{r} + R\lambda^2 = 0
+\end{aligned}
+\end{equation}
+We now want to try to put this in the form of a Bessel function by multiplying through by $r^2$ and letting $x=\lambda r$ and $R(r) = \frac{w(x)}{x}$ as given in section (11.36) of the notes. First, we must determine $R''(r)$ and $R'(r)$:
+\begin{equation}
+\begin{aligned}
+x^2\frac{d^2}{dx^2}R + 2x\frac{d}{dx}R + x^2R = 0\\
+\frac{d}{dx}R = -x^{-2}w(x) + x^{-1}{w'(x)}\\
+\frac{d^2}{dx^2} = 2x^{-3}w(x) - x^{-2}w'(x) - x^{-2}w'(x) + x^{-1}w''(x)\\
+\frac{d^2}{dx^2} = 2x^{-3}w(x) - 2x^{-2}w'(x) + x^{-1}w''(x)\\
+\end{aligned}
+\end{equation}
+Substituting into our spherical Bessel function:
+\begin{equation}
+\begin{aligned}
+x^2 \Big{[} 2x^{-3}w(x) &- 2x^{-2}w'(x) + x^{-1}w''(x) \Big{]}\\
+ &+ 2x \Big{[}-x^{-2}w(x) + x^{-1}{w'(x)} \Big{]} + x^2(x^{-1}w(x)) = 0\\
+\end{aligned}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+ 2x^{-1}w(x) - 2w'(x) + xw''(x) - 2x^{-1}w(x) + 2xw'(x) + xw(x) = 0\\
+ x(w''(x) + w(x)) = 0\\
+ w(x) = Asin(x) + Bcos(x)
+\end{aligned}
+\end{equation}
+Substituting back $R(r) = \frac{w(x)}{x}$:
+\begin{equation}
+\begin{aligned}
+R(r) = A\frac{sinx}{x} + B\frac{cosx}{x}
+\end{aligned}
+\end{equation}
+We then note the equation must be bounded at $x=0$ so we can't have it blowing up. As a result $B=0$. We could use L'Hospital's rule with the remaining term, but I'm going to go with a snarky reddit mathematician and simply note that if we know $\frac{d}{dx}sinx = cosx$ and $cos(0) = 1$ then as $x\to$, the fraction $\frac{sinx}{x}$ must be 1. Thus this term is still bounded at $x=0$. Applying the other BC $\Psi=0$ at $r=a$ we have:
+\begin{equation}
+\begin{aligned}
+R(a) = A\frac{sin(\lambda a)}{\lambda a})
+\end{aligned}
+\end{equation}
+The resulting non-trivial solution requires that $\lambda = \lambda_k=\frac{k\pi}{a}$ with $k=1,2,3...$. So we have our value for $\lambda$, which we can plug back into the substitution in \textbf{(14)} above giving:
+\begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
+\begin{equation}
+\begin{aligned}
+\lambda^2 = \lambda_k^2 = (\frac{k\pi}{a})^2 =  \frac{2\mu E}{h^2}\\
+E = E_k = \frac{(k\pi h)^2}{2a^2\mu}\\
+k = 1,2,3...
+\end{aligned}
+\end{equation}
+\end{tcolorbox}
 
 \end{document}
