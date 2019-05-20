@@ -302,7 +302,7 @@ P_4 = \frac{1}{384}(1680x^4 - 1440x^2+144) = \frac{35}{8}x^4 - \frac{15}{4}x^3+\
 \end{equation}
 \begin{equation}
 \begin{aligned}
-a_4 = \frac{9}{2} \Big{[} \frac{35}{8}\int_0^1^5dx - \frac{15}{4}\int_0^1x^3dx +\frac{3}{8}\int_0^1xdx \Big{]}\\
+a_4 = \frac{9}{2} \Big{[} \frac{35}{8}\int_0^1x^5dx - \frac{15}{4}\int_0^1x^3dx +\frac{3}{8}\int_0^1xdx \Big{]}\\
 a_4 =\frac{316}{16}(\frac{1}{6}) - \frac{135}{8}(\frac{1}{4}) + \frac{27}{16}(\frac{1}{2}) = \frac{-3}{32}
 \end{aligned}
 \end{equation}
@@ -318,7 +318,43 @@ a_4 = \frac{-3}{32}\text{ , } & P_4 = \frac{35}{8}x^4 - \frac{15}{4}x^2 +\frac{3
 \end{equation}
 \end{tcolorbox}
 Below are the plots of one, two, three, and all four, terms:
-
+    \begin{figure*}
+        \centering
+        \begin{subfigure}[b]{0.8\textwidth}
+            \centering
+            \includegraphics[width=\textwidth]{part3_a0.pdf}
+            %\caption[Network2]%
+            %{{\small Network 1}}    
+            %\label{fig:mean and std of net14}
+        \end{subfigure}
+        \hfill
+        \begin{subfigure}[b]{0.8\textwidth}  
+            \centering 
+            \includegraphics[width=\textwidth]{part3_a1.pdf}
+            %\caption[]%
+            %{{\small Network 2}}    
+            %\label{fig:mean and std of net24}
+        \end{subfigure}
+        \vskip\baselineskip
+        \begin{subfigure}[b]{0.8\textwidth}   
+            \centering 
+            \includegraphics[width=\textwidth]{part3_a2.pdf}
+            %\caption[]%
+            %{{\small Network 3}}    
+            %\label{fig:mean and std of net34}
+        \end{subfigure}
+        \quad
+        \begin{subfigure}[b]{0.8\textwidth}   
+            \centering 
+            \includegraphics[width=\textwidth]{part3_a4.pdf}
+            %\caption[]%
+            %{{\small Network 4}}    
+            %\label{fig:mean and std of net44}
+        \end{subfigure}
+        %\caption[ The average and standard deviation of critical parameters ]
+        %{\small The average and standard deviation of critical parameters: Region R4} 
+        %\label{fig:mean and std of nets}
+    \end{figure*}
 
 
 \end{document}
