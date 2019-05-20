@@ -1,0 +1,147 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyfoot[C]{\thepage}
+\rhead{Yarosevich - 1064712}
+\usepackage{setspace}
+\usepackage{siunitx} % Provides the \SI{}{} and \si{} command for typesetting SI units
+\usepackage{graphicx} % Required for the inclusion of images
+\usepackage{amsmath} % Required for some math elements 
+\usepackage[export]{adjustbox} % loads also graphicx
+\usepackage{listings}
+\usepackage{setspace}
+\usepackage{matlab-prettifier}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+\usepackage{amsfonts}
+\usepackage{color}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{bm}
+\usepackage{esvect}
+\newcommand{\uveci}{{\bm{\hat{\textnormal{\bfseries\i}}}}}
+\newcommand{\uvecj}{{\bm{\hat{\textnormal{\bfseries\j}}}}}
+\DeclareRobustCommand{\uvec}[1]{{%
+  \ifcsname uvec#1\endcsname
+     \csname uvec#1\endcsname
+   \else
+    \bm{\hat{\mathbf{#1}}}%
+   \fi
+}}
+
+
+\newcommand{\R}{\mathbb{R}}
+
+\usepackage{xcolor}
+
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+  \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-4pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep}
+\titleformat{\section}[runin]
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}[runin]
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\renewcommand{\labelenumi}{\alph{enumi}.} % Make numbering in the enumerate environment by letter rather than number (e.g. section 6)
+
+%\usepackage{times} % Uncomment to use the Times New Roman font
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{AMATH 503: Homework 3 \\Due April, 29 2019 \\ ID: 1064712} % Title
+
+\author{Trent \textsc{Yarosevich}} % Author name
+
+\date{\today} % Date for the report
+
+\begin{document}
+\maketitle % Insert the title, author and date
+\setlength\parindent{1cm}
+
+\begin{center}
+\begin{tabular}{l r}
+%Date Performed: December 1, 2017 \\ % Date the experiment was performed
+Instructor: Ka-Kit Tung % Instructor/supervisor
+\end{tabular}
+\end{center}
+\doublespacing
+% If you wish to include an abstract, uncomment the lines below
+% \begin{abstract}
+% Abstract text
+% \end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	SECTION 1
+%----------------------------------------------------------------------------------------
+\section*{\textbf{(1)}}
+To begin, we proceed with separation of variables as in class, assuming that the spatial component has to dependence on $\theta$. We thus assume a solution of the form:
+\begin{equation}
+\begin{aligned}
+\Psi = T(t)u(r,z)
+\end{aligned}
+\end{equation}
+When we apply this to the PDE we have:
+\begin{equation}
+\begin{aligned}
+\frac{T''(t)}{c^2T(t)} = \frac{\nabla^2u}{u}
+\end{aligned}
+\end{equation}
+We proceed as usual, noting that these ODEs must be equal to a constant, which we'll call $-\lambda^2$. This then gives the following solutions for the $T$ component:
+\begin{equation}
+\begin{aligned}
+T(t) = Asin(c\lambda t) + Bcos(c\lambda t)
+\end{aligned}
+\end{equation}
+From this equation we can then infer that the frequency is given by $\omega = c\lambda$, however this wavenumber $\lambda$ is determined by the spatial qualities of the cavity. Thus we move on to doing separation of variables of the spatial component, noting that we must apply the laplacian in cylindrical coordinates:
+\begin{equation}
+\begin{aligned}
+u(r,z) = R(r)Z(z)\\
+\frac{Z''(z)}{Z(z)} + \frac{(rR'(r))'}{rR} = -\lambda^2\\ 
+\end{aligned}
+\end{equation}
+We now assume the $Z$ component is equal to some constant $-b^2$, giving the familiar family of solutions to which we can apply some boundary conditions:
+\begin{equation}
+\begin{aligned}
+\frac{Z''(z)}{Z(z)} = -b^2\\
+b = \frac{l\pi}{L}\\
+Z(z) = A_lsin(\frac{l\pi z}{L}) + B_lcos(\frac{l \pi z}{L})\\
+Z(0) = 0 = B_l\\
+Z(L) = 0 = A_lsin(l\pi)\\
+l = 1,2,3...
+\end{aligned}
+\end{equation}
+Applying this result we have the following:
+\begin{equation}
+\begin{aligned}
+\frac{(rR'(r))'}{rR} +(\lambda^2 - b^2) = 0\\ 
+(rR'(r))' + rR(\lambda^2 - b^2) = 0\\
+rR''(r) + R'(r) + rR(\lambda^2 - b^2) = 0\\ 
+\end{aligned}
+\end{equation}
+So now we want to put this in the form of Bessel's equation. We do this by multiplying through by $r$ and substituting $x = r\sqrt{\lambda^2-b^2}$ and $y(x) = R(r)$ as in the notes, section (11.22). 
+\begin{equation}
+\begin{aligned}
+r^2R''(r) + rR'(r) + r^2R(\lambda^2 - b^2) = 0\\ 
+x^2y''(x) + xy'(x) + x^2y(x) = 0
+\end{aligned}
+\end{equation}
+In lecture, the Professor noted that once we get to this standard form for the Bessel equation, we should proceed directly to the solution obtained by the Frobenius expansion, $y(x) = AJ_m(x) + BY_m(x)$. However, we can immediately note that the solution is bounded at $R(0)$, and so we have a Bessel function of he first kind, with $B=0$, since $Y_m(x)$ blows up at $x=0$. We thus have:
+\begin{equation}
+\begin{aligned}
+y(x) = AJ_m(x)\\
+R(r) = AJ_m(r\sqrt{\lambda^2 - b^2})
+\end{aligned}
+\end{equation}
+Applying the other boundary condition of 
+
+\end{document}
