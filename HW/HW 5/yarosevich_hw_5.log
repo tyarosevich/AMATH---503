@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500) (preloaded format=pdflatex 2017.12.5)  27 MAY 2019 15:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (MiKTeX 2.9.6500) (preloaded format=pdflatex 2017.12.5)  27 MAY 2019 16:07
 entering extended mode
 **"C:/Users/zennsunni/Dropbox (Personal)/School Stuff/AMATH 503/AMATH---503/HW/
 HW 5/yarosevich_hw_5.tex"
@@ -1276,13 +1276,27 @@ File: uesvect.fd
 [1
 
 {C:/Users/zennsunni/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+Overfull \hbox (32.53566pt too wide) detected at line 115
+[][]
+ []
+
+
+Overfull \hbox (26.57089pt too wide) detected at line 121
+[][]
+ []
+
+
+Overfull \hbox (79.58249pt too wide) detected at line 127
+[][]
+ []
+
 [2]
 Underfull \hbox (badness 10000) in paragraph at lines 139--154
 
  []
 
 [3] [4] [5]
-Underfull \hbox (badness 10000) in paragraph at lines 253--255
+Underfull \hbox (badness 10000) in paragraph at lines 254--256
 
  []
 
@@ -1293,10 +1307,10 @@ See the caption package documentation for explanation.
 
 [11] (yarosevich_hw_5.aux) ) 
 Here is how much of TeX's memory you used:
- 31524 strings out of 493312
- 676642 string characters out of 3136295
+ 31526 strings out of 493312
+ 676676 string characters out of 3136295
  716944 words of memory out of 3000000
- 34588 multiletter control sequences out of 15000+200000
+ 34590 multiletter control sequences out of 15000+200000
  547031 words of font info for 89 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  63i,16n,101p,10509b,421s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1314,7 +1328,7 @@ pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb>
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/
 Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Pr
 ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on yarosevich_hw_5.pdf (11 pages, 185209 bytes).
+Output written on yarosevich_hw_5.pdf (11 pages, 185331 bytes).
 PDF statistics:
  133 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

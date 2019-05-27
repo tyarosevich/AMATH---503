@@ -92,7 +92,7 @@ If we have a Bessel Equation of the form:
 y \text{ bounded at } x = 0, \text{ , } y(a) = 0\\
 \end{aligned}
 \end{equation}
-We know from the notes and previous homework that this will be solved by the eigenfunctions $J_m(\lambda x)$. The eigenfunctions are derived with the Frobenius solution, and the eigenvalues are implicitly determined by from the zeros of the eigenfunctions, which are cosine-like. Given this, let the eigenfunctions be $J_m(x)$ and the eigenvalues $(\lambda_{mn} = \frac{z_{mn}}{a})$ where $z_{mn}$ are the zeros of the eigenfunction. We use the equation above and observe that this is a Sturm-Liouville  system with:
+We know from the notes and previous homework that this will be solved by the eigenfunctions $J_m(\lambda x)$. The eigenfunctions are derived with the Frobenius solution, and the eigenvalues are implicitly determined by from the zeros of the eigenfunctions, which are cosine-like. Given this, let the eigenfunctions be $J_m(\lambda_{mn}x)$ and the eigenvalues $(\lambda_{mn} = \frac{z_{mn}}{a})$ where $z_{mn}$ are the zeros of the eigenfunction. We use the equation above and observe that this is a Sturm-Liouville  system with:
 \begin{equation}
 \begin{aligned}
 p(x) = x\\
@@ -100,53 +100,53 @@ r(x) = x\\
 q(x) = \frac{p^2}{x}\\
 \end{aligned}
 \end{equation}
-We now consider two pairs of eigenfunctions and eigenvalues, $(J_m(x);\lambda_{mn})$ and $(J_k(x)); \lambda_{kx})$ and plug them into the Bessel's Equation, giving:
+We now consider two pairs of eigenfunctions and eigenvalues, $(J_m(\lambda_{mn}x);\lambda_{mn})$ and $(J_k(\lambda_{kn}x)); \lambda_{kx})$ and plug them into the Bessel's Equation, giving:
 \begin{equation}
 \begin{aligned}
-(xJ_m(x)')' + (\lambda_{mn}^2x - \frac{p^2}{x}) = 0\\
-(xJ_k(x)')' + (\lambda_{kn}^2x - \frac{p^2}{x}) = 0
+(xJ_m(\lambda_{mn}x)')' + (\lambda_{mn}^2x - \frac{p^2}{x}) = 0\\
+(xJ_k(\lambda_{mn}x)')' + (\lambda_{kn}^2x - \frac{p^2}{x}) = 0
 \end{aligned}
 \end{equation}
-We then follow the logic of the general proof of S-L orthogonality by multiplying the first by $J_k(x)$ and the second by $J_m(x)$ then subtracting one from the other:
+We then follow the logic of the general proof of S-L orthogonality by multiplying the first by $J_k(\lambda_{kn}x)$ and the second by $J_m(\lambda_{mn}x)$ then subtracting one from the other:
 \begin{equation}
 \begin{aligned}
-J_k(x) (xJ_m(x)')' - J_m(x)(xJ_k(x)')' = (\lambda_{mn} - \lambda_{kn})xJ_m(x)J_k(x)\\
+J_k(\lambda_{kn}x) (xJ_m(\lambda_{mn}x)')' - J_m(\lambda_{mn}x)(xJ_k(\lambda_{kn}x)')' = (\lambda_{mn} - \lambda_{kn})xJ_m(\lambda_{mn}x)J_k(\lambda_{kn}x)\\
 \end{aligned}
 \end{equation}
 The LHS is a derivative, so we rewrite as follows:
 \begin{equation}
 \begin{aligned}
-\frac{d}{dx} \Big{[}J_k(x)(xJ_m(x))') - J_m(x)(J_k(x)') \Big{]} = \Big{[}(\lambda_{mn} - \lambda_{kn})xJ_m(x)J_k(x)\Big{]}\
+\frac{d}{dx} \Big{[}J_k(\lambda_{kn}x)(xJ_m(\lambda_{mn}x))') - J_m(\lambda_{mn}x)(J_k(\lambda_{kn}x)') \Big{]} = \Big{[}(\lambda_{mn} - \lambda_{kn})xJ_m(x)J_k(x)\Big{]}\
 \end{aligned}
 \end{equation}
 We then integrate both sides giving:
 \begin{equation}
 \begin{aligned}
- \Big{[}J_k(x)(xJ_m(x))') - J_m(x)(J_k(x)') \Big{]}\Big{|}_0^a = \int_0^a\Big{[}(\lambda_{mn} - \lambda_{kn})xJ_m(x)J_k(x)\Big{]}dx
+ \Big{[}J_k(\lambda_{kn}x)(xJ_m(\lambda_{mn}x))') - J_m(\lambda_{mn}x)(J_k(\lambda_{kn}x)') \Big{]}\Big{|}_0^a = \int_0^a\Big{[}(\lambda_{mn} - \lambda_{kn})xJ_m(\lambda_{mn}x)J_k(\lambda_{kn}x)\Big{]}dx
 \end{aligned}
 \end{equation}
 We then observe that, since this is a singular S-L system and $p(x) = 0$ at $x=0$ and $x=a$. In this case, $p(x) = x$ so it' a little confusing, but let's just suppose we have a dummy variable for a moment, and $p(s) = s$. Then in a singular S-L system, $p(s) = x = 0$ when $s = 0, a$. From this we can infer that the LHS must be identically zero. This gives:
 \begin{equation}
  \begin{aligned}
-(\lambda_{mn} - \lambda_{kn})\int_0^axJ_m(x)J_k(x)dx = 0
+(\lambda_{mn} - \lambda_{kn})\int_0^axJ_m(\lambda_{mn}x)J_k(\lambda_{kn}x)dx = 0
 \end{aligned}
 \end{equation}
 We can now simply observe that, if $\lambda_{mn} = \lambda_{kn}$, the leading constant becomes zero, and the integral becomes:
 \begin{equation}
 \begin{aligned}
-\int_0^ax(J_m(x))^2dx
+\int_0^ax(J_m(\lambda_{mn}x))^2dx
 \end{aligned}
 \end{equation}
-This integral is a positive constant since $x>0$ for this Bessel function, and the eigenfunction is squared. The integrand $ax(J_m(x))^2 >0$ and therefore the resulting integral will be a positive constant. \\
+This integral is a positive constant since $x>0$ for this Bessel function, and the eigenfunction is squared. The integral is $ax(J_m(a\lambda_{mn}x))^2 >0$ and therefore a positive constant. \\
 \\
 Alternatively, if $\lambda_{mn} \neq \lambda_{kn}$, this integral must be identically zero. The resulting integral is thus:
 \begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
 \begin{equation}
 \begin{aligned}
-\int_0^axJ_m(x)J_k(x)dx =
+\int_0^axJ_m(\lambda_{mn}x)J_k(\lambda_{kn}x)dx =
  \begin{cases} 
-      0 & \lambda_{mn} \neq \lambda_{kn} \\
-      c & \lambda_{mn} = \lambda_{kn}
+      0, & \lambda_{mn} \neq \lambda_{kn} \\
+      c, & \lambda_{mn} = \lambda_{kn}
    \end{cases}
 \end{aligned}
 \end{equation}
@@ -204,10 +204,11 @@ v_t(r,0) = h(r)\\
 ru_t(r,0) = h(r)\\
 u_t(r,0) = \frac{1}{r}h(r)\\
 \text{So we define some new function:}\\
+u_t(r,0) = k(r)\\
 rk(r) = h(r)
 \end{aligned}
 \end{equation}
-We then substitute all the transformed terms into the solution and get:
+We then substitute all the transformed terms into the solution and replace the $r$ terms with suitable $r\pm ct$ or $s$ and get:
 \begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
 \begin{equation}
 \begin{aligned}
@@ -373,23 +374,18 @@ k = \frac{4}{(n\pi)^3}
 Thus the complete solution for $T(t)$ for odd $n$ is:
 \begin{equation}
 \begin{aligned}
-T_n(t) = A_n sin(n\pi t) + B_n cos(n\pi t) + \frac{4}{(n\pi)^3}
+T_n(t) = \sum_{n=1}^{\infty}A_n sin(n\pi t) + B_n cos(n\pi t) + \frac{4}{(n\pi)^3}
 \end{aligned}
 \end{equation}
-And the complete general solutions are:
-\begin{equation}
-\begin{aligned}
-n = 2,4,6 &\to u(x,t) = \sum_{n=1}^{\infty} \Big{[} A_n sin(n\pi t) + B_n cos(n\pi t)\Big{]}sin(n\pi x)\\
-n = 1,3,5... &\to u(x,t) = \sum_{n=1}^{\infty} \Big{[} A_n sin(n\pi t) + B_n cos(n\pi t) +\frac{4}{(n\pi)^3} \Big{]}sin(n\pi x)\\
-\end{aligned}
-\end{equation}
-However, and I'm not fully clear on the explanation for this, the solution when $n$ is even will simply go to zero if one applies the boundary conditions. I suppose there is a sense in which this is to be expected, since the forcing term itself doesn't include even modes in the sine series used to represent it. I suppose, then, that those cases were irrelevant to begin with (though we did need to find the homogeneous solution as part of the process for solving the odd $n$). In any case the full general solution is thus:
+Now, I'm not sure how to articulate this accurately, but I think the $n=2,4,6..$ case is not a part of the solution, since it actually doesn't satisfy the PDE. I speculate that this is because $f_n$ can be defined with strictly odd $n$. We will need to solve the homogeneous case, but the general solution is of the form:
+\begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
 \begin{equation}
 \begin{aligned}
 u(x,t) = \sum_{n=1}^{\infty} \Big{[} A_n sin(n\pi t) + B_n cos(n\pi t) +\frac{4}{(n\pi)^3} \Big{]}sin(n\pi x)\\
 n = 1,3,5...
 \end{aligned}
 \end{equation}
+\end{tcolorbox}
 Applying the Initial Conditions:
 \begin{equation}
 \begin{aligned}
@@ -412,7 +408,7 @@ n = 1,3,5...
 If we note from \textbf{(22)} above that 
 \begin{equation}
 \begin{aligned}
-n = 1,3,5..
+n = 1,3,5..\\
 \sum_{n=1}^{\infty}\frac{-4}{(n\pi)^3}sin(n\pi x) = \frac{x^2}{2} - \frac{x}{2}\\
 \sum_{n=1}^{\infty}\frac{4}{(n\pi)^3}sin(n\pi x) = -\frac{x^2}{2} +\frac{x}{2}\\
 \end{aligned}
