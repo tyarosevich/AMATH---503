@@ -1,0 +1,220 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyfoot[C]{\thepage}
+\rhead{Yarosevich - 1064712}
+\usepackage{setspace}
+\usepackage{siunitx} % Provides the \SI{}{} and \si{} command for typesetting SI units
+\usepackage{graphicx} % Required for the inclusion of images
+\usepackage{amsmath} % Required for some math elements 
+\usepackage[export]{adjustbox} % loads also graphicx
+\usepackage{listings}
+\usepackage{setspace}
+\usepackage{matlab-prettifier}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+\usepackage{amsfonts}
+\usepackage{color}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{bm}
+\usepackage{esvect}
+\newcommand{\uveci}{{\bm{\hat{\textnormal{\bfseries\i}}}}}
+\newcommand{\uvecj}{{\bm{\hat{\textnormal{\bfseries\j}}}}}
+\DeclareRobustCommand{\uvec}[1]{{%
+  \ifcsname uvec#1\endcsname
+     \csname uvec#1\endcsname
+   \else
+    \bm{\hat{\mathbf{#1}}}%
+   \fi
+}}
+
+
+\newcommand{\R}{\mathbb{R}}
+
+\usepackage{xcolor}
+
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+  \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-4pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep}
+\titleformat{\section}[runin]
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}[runin]
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\renewcommand{\labelenumi}{\alph{enumi}.} % Make numbering in the enumerate environment by letter rather than number (e.g. section 6)
+
+%\usepackage{times} % Uncomment to use the Times New Roman font
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{AMATH 503: Homework 5 \\Due May, 28 2019 \\ ID: 1064712} % Title
+
+\author{Trent \textsc{Yarosevich}} % Author name
+
+\date{\today} % Date for the report
+
+\begin{document}
+\maketitle % Insert the title, author and date
+\setlength\parindent{1cm}
+
+\begin{center}
+\begin{tabular}{l r}
+%Date Performed: December 1, 2017 \\ % Date the experiment was performed
+Instructor: Professor Ka-Kit Tung % Instructor/supervisor
+\end{tabular}
+\end{center}
+\doublespacing
+% If you wish to include an abstract, uncomment the lines below
+% \begin{abstract}
+% Abstract text
+% \end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	SECTION 1
+%----------------------------------------------------------------------------------------
+\section*{\textbf{(1)}}
+If we have a Bessel Equation of the form:
+\begin{equation}
+\begin{aligned}
+(xy')' + (\lambda^2x - \frac{m^2}{x})y = 0\\
+0 < x < a\\
+y \text{ bounded at } x = 0, \text{ , } y(a) = 0\\
+\end{aligned}
+\end{equation}
+We know from the notes and previous homework that this will be solved by the eigenfunctions $J_m(\lambda x)$. The eigenfunctions are derived with the Frobenius solution, and the eigenvalues are implicitly determined by from the zeros of the eigenfunctions, which are cosine-like. Given this, let the eigenfunctions be $J_m(x)$ and the eigenvalues $(\lambda_{mn} = \frac{z_{mn}}{a})$ where $z_{mn}$ are the zeros of the eigenfunction. We use the equation above and observe that this is a Sturm-Liouville  system with:
+\begin{equation}
+\begin{aligned}
+p(x) = x\\
+r(x) = x\\
+q(x) = \frac{p^2}{x}\\
+\end{aligned}
+\end{equation}
+We now consider two pairs of eigenfunctions and eigenvalues, $(J_m(x);\lambda_{mn})$ and $(J_k(x)); \lambda_{kx})$ and plug them into the Bessel's Equation, giving:
+\begin{equation}
+\begin{aligned}
+(xJ_m(x)')' + (\lambda_{mn}^2x - \frac{p^2}{x}) = 0\\
+(xJ_k(x)')' + (\lambda_{kn}^2x - \frac{p^2}{x}) = 0
+\end{aligned}
+\end{equation}
+We then follow the logic of the general proof of S-L orthogonality by multiplying the first by $J_k(x)$ and the second by $J_m(x)$ then subtracting one from the other:
+\begin{equation}
+\begin{aligned}
+J_k(x) (xJ_m(x)')' - J_m(x)(xJ_k(x)')' = (\lambda_{mn} - \lambda_{kn})xJ_m(x)J_k(x)\\
+\end{aligned}
+\end{equation}
+The LHS is a derivative, so we rewrite as follows:
+\begin{equation}
+\begin{aligned}
+\frac{d}{dx} \Big{[}J_k(x)(xJ_m(x))') - J_m(x)(J_k(x)') \Big{]} = \Big{[}(\lambda_{mn} - \lambda_{kn})xJ_m(x)J_k(x)\Big{]}\
+\end{aligned}
+\end{equation}
+We then integrate both sides giving:
+\begin{equation}
+\begin{aligned}
+ \Big{[}J_k(x)(xJ_m(x))') - J_m(x)(J_k(x)') \Big{]}\Big{|}_0^a = \int_0^a\Big{[}(\lambda_{mn} - \lambda_{kn})xJ_m(x)J_k(x)\Big{]}dx
+\end{aligned}
+\end{equation}
+We then observe that, since this is a singular S-L system and $p(x) = 0$ at $x=0$ and $x=a$. In this case, $p(x) = x$ so it' a little confusing, but let's just suppose we have a dummy variable for a moment, and $p(s) = s$. Then in a singular S-L system, $p(s) = x = 0$ when $s = 0, a$. From this we can infer that the LHS must be identically zero. This gives:
+\begin{equation}
+ \begin{aligned}
+(\lambda_{mn} - \lambda_{kn})\int_0^axJ_m(x)J_k(x)dx = 0
+\end{aligned}
+\end{equation}
+We can now simply observe that, if $\lambda_{mn} = \lambda_{kn}$, the leading constant becomes zero, and the integral becomes:
+\begin{equation}
+\begin{aligned}
+\int_0^ax(J_m(x))^2dx
+\end{aligned}
+\end{equation}
+This integral is a positive constant since $x>0$ for this Bessel function, and the eigenfunction is squared. The integrand $ax(J_m(x))^2 >0$ and therefore the resulting integral will be a positive constant. \\
+\\
+Alternatively, if $\lambda_{mn} \neq \lambda_{kn}$, this integral must be identically zero. The resulting integral is thus:
+\begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
+\begin{equation}
+\begin{aligned}
+\int_0^axJ_m(x)J_k(x)dx =
+ \begin{cases} 
+      0 & \lambda_{mn} \neq \lambda_{kn} \\
+      c & \lambda_{mn} = \lambda_{kn}
+   \end{cases}
+\end{aligned}
+\end{equation}
+Where $c>0$ is a constant.
+\end{tcolorbox}
+\section*{\textbf{(2)}}
+\subsection*{\textbf{(a)}}
+From the prompt we know that, with spherical symmetry, the 3D wave equation becomes:
+\begin{equation}
+\begin{aligned}
+u_{tt} = \frac{c^2}{r}(ru)_{rr}
+\end{aligned}
+\end{equation}
+Bringing the $r$ to the LHS, we can note that it is constant variable with respect to $t$, and we can write the PDE as:
+\begin{equation}
+\begin{aligned}
+(ru)_{tt} = c^2(ru)_{rr}
+\end{aligned}
+\end{equation}
+Now let's substitute $v= ru$ and plug the resulting equation into the D'Alembert Solution:
+\begin{equation}
+\begin{aligned}
+v_{tt} = c^2v_{rr}\\
+v(r,t) = \frac{1}{2} \Big{[}g(r - ct) + g(r + ct) + \frac{1}{2c}\int^{r+ct}_{r-ct}h(s)ds
+\end{aligned}
+\end{equation}
+To transform $g$ back to its equivalent term in $u$:
+\begin{equation}
+\begin{aligned}
+v(r,0) = g(r)\\
+\end{aligned}
+\end{equation}
+And the final form of the equation is:
+\begin{equation}
+\begin{aligned}
+u(r,0) = f(r)
+\end{aligned}
+\end{equation}
+Thus we have:
+\begin{equation}
+\begin{aligned}
+\frac{1}{r}v(r,0) = u(r,0)\\
+\frac{1}{r}g(r) = f(r)\\
+g(r) = r f(r)\\
+\end{aligned}
+\end{equation}
+Similarly, we observe that:
+\begin{equation}
+\begin{aligned}
+v_t = \frac{d}{dt} \Big{[}\frac{1}{2c}\int^{r+ct}_{r-ct}h(s)ds \Big{]}\\
+v_t =\frac{1}{2c} \frac{d}{dt} \Big{[}H(r+ct) - H(r-ct) \Big{]}\\
+v_t = \frac{1}{2c} \Big{[}h(r+ct)(c) - h(r-ct)(-c)\Big{]}\\
+v_t = \frac{1}{2} \Big{[}h(r+ct) + h(r-ct)\\
+v_t(r,0) = h(r)\\
+ru_t(r,0) = h(r)\\
+u_t(r,0) = \frac{1}{r}h(r)\\
+\text{So we define some new function:}\\
+rk(r) = h(r)
+\end{aligned}
+\end{equation}
+We then substitute all the transformed terms into the solution and get:
+\begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
+\begin{equation}
+\begin{aligned}
+ru(r,t) = \frac{1}{2} \Big{[}(r-ct)f(r-ct) + (r+ct)f(r+ct) + \frac{1}{2c}\int_{r-ct}^{r+ct}sk(s)ds\\
+u(r,t) = \frac{1}{2r} \Big{[}(r-ct)f(r-ct) + (r+ct)f(r+ct) + \frac{1}{2c}\int_{r-ct}^{r+ct}sk(s)ds\\
+\end{aligned}
+\end{equation}
+\end{tcolorbox}
+
+\end{document}
