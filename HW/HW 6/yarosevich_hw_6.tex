@@ -1,0 +1,154 @@
+\documentclass{article}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot{}
+\fancyfoot[C]{\thepage}
+\rhead{Yarosevich - 1064712}
+\usepackage{setspace}
+\usepackage{siunitx} % Provides the \SI{}{} and \si{} command for typesetting SI units
+\usepackage{graphicx} % Required for the inclusion of images
+\usepackage{amsmath} % Required for some math elements 
+\usepackage[export]{adjustbox} % loads also graphicx
+\usepackage{listings}
+\usepackage{setspace}
+\usepackage{matlab-prettifier}
+\usepackage{physics}
+\usepackage{float}
+\usepackage[most]{tcolorbox}
+\usepackage{amsfonts}
+\usepackage{color}
+\usepackage{titlesec}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{placeins}
+\usepackage{bm}
+\usepackage{esvect}
+\newcommand{\uveci}{{\bm{\hat{\textnormal{\bfseries\i}}}}}
+\newcommand{\uvecj}{{\bm{\hat{\textnormal{\bfseries\j}}}}}
+\DeclareRobustCommand{\uvec}[1]{{%
+  \ifcsname uvec#1\endcsname
+     \csname uvec#1\endcsname
+   \else
+    \bm{\hat{\mathbf{#1}}}%
+   \fi
+}}
+
+
+\newcommand{\R}{\mathbb{R}}
+
+\usepackage{xcolor}
+
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{%
+  \parbox{\textwidth}{\colorbox{gray}{\parbox{\textwidth}{#1#2#3}}\vskip-4pt}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white}
+\lstset{frame=lrb,xleftmargin=\fboxsep,xrightmargin=-\fboxsep}
+\titleformat{\section}[runin]
+  {\normalfont\Large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}[runin]
+  {\normalfont\large\bfseries}{\thesubsection}{1em}{}
+
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs
+
+\renewcommand{\labelenumi}{\alph{enumi}.} % Make numbering in the enumerate environment by letter rather than number (e.g. section 6)
+
+%\usepackage{times} % Uncomment to use the Times New Roman font
+
+%----------------------------------------------------------------------------------------
+%	DOCUMENT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{AMATH 503: Homework 5 \\Due May, 28 2019 \\ ID: 1064712} % Title
+
+\author{Trent \textsc{Yarosevich}} % Author name
+
+\date{\today} % Date for the report
+
+\begin{document}
+\maketitle % Insert the title, author and date
+\setlength\parindent{1cm}
+
+\begin{center}
+\begin{tabular}{l r}
+%Date Performed: December 1, 2017 \\ % Date the experiment was performed
+Instructor: Professor Ka-Kit Tung % Instructor/supervisor
+\end{tabular}
+\end{center}
+\doublespacing
+% If you wish to include an abstract, uncomment the lines below
+% \begin{abstract}
+% Abstract text
+% \end{abstract}
+
+%----------------------------------------------------------------------------------------
+%	SECTION 1
+%----------------------------------------------------------------------------------------
+\section*{\textbf{(1)}}
+\subsection*{\textbf{(a)}}
+Given the solution to the Green's Function for the Heat Equation in 1-D stated on page 228 of the notes, we can define the semi-infinite domain as $0<x<\infty$, and then subtract the same solution defined at the location $x = -\xi$ to satisfy the boundary condition $G=0$ at $x=0$. This gives the Green's Function:
+\begin{equation}
+\begin{aligned}
+G(x, t;\xi, \tau) &= \frac{1}{\sqrt{4\pi D(t-\tau)}}\Big{[} e^{-\frac{(x-\xi)^2}{4D(t-\tau)}} -e^{-\frac{(x+\xi)^2}{4D(t-\tau)}}\Big{]}
+\end{aligned}
+\end{equation}
+To show this satisfies the BC, we can simply observe that if $x=0$, the two exponential terms are equivalent since the only difference is the $\pm\xi$ term, which is squared anyway. The other boundary condition is still satisfied since both of these exponentials have negative terms, and will go to zero as $x\to\infty$.
+\subsection*{\textbf{(b)}}
+To satisfy a boundary condition of $\pdv{}{x}G$ at $x=0$, we can observe that if we add a solution mirrored across the $G$ axis, the two resulting normal distributions will have equal slope, but opposite in sign, at $x=0$:
+\begin{equation}
+\begin{aligned}
+G(x, t;\xi, \tau) &= \frac{1}{\sqrt{4\pi D(t-\tau)}}\Big{[} e^{-\frac{(x-\xi)^2}{4D(t-\tau)}}+e^{-\frac{(x+\xi)^2}{4D(t-\tau)}}\Big{]}
+\end{aligned}
+\end{equation}
+We can show this satisfies the BC at $x=0$ by taking the derivatives of the exponentials:
+\begin{equation}
+\begin{aligned}
+\pdv{}{x}(e^{-\frac{(x-\xi)^2}{4 D(t-\tau)}}) = \frac{-2(x-\xi)}{4D(t-\tau)}e^{-\frac{(x-\xi)^2}{4D(t-\tau)}}\\
+\pdv{}{x}(e^{-\frac{(x+\xi)^2}{4D(t-\tau)}}) = \frac{-2(x+\xi)}{4D(t-\tau)}e^{-\frac{(x+\xi)^2}{4D(t-\tau)}}\\
+\end{aligned}
+\end{equation}
+When $x=0$, again the two terms cancel since the sign on the $-\xi$ carries out, and the $\pm\xi$ in the exponents are equivalent because they are squared:
+\begin{equation}
+\begin{aligned}
+ \frac{2(\xi)}{4D(t-\tau)}e^{-\frac{(-\xi)^2}{4D(t-\tau)}} - \frac{2(\xi)}{4D(t-\tau)}e^{-\frac{(\xi)^2}{4D(t-\tau)}}=0\\
+\end{aligned}
+\end{equation}
+Again, the BC of $G=0$ as $x\to\infty$ is still satisfied since both normal distributions are raised to strictly negative exponent dependent on $x$.
+\section*{\textbf{(2)}}
+\subsection*{\textbf{(a)}}
+We want to show that 
+\begin{equation}
+\begin{aligned}
+(\pdv[2]{}{t} - c^2\pdv[2]{}{x})u =\delta(x-\xi)\delta(t-\tau)\\
+u = 0 \text{ , }\pdv{}{t}u = 0 \text{ at } t=0\\
+\end{aligned}
+\end{equation}
+is equivalent to:
+\begin{equation}
+\begin{aligned}
+(\pdv[2]{}{t} - c^2\pdv[2]{}{x})u = 0\\
+u = 0 \text{ and } \pdv{}{t}u = \delta(x-\xi) \text{ at } t=\tau
+\end{aligned}
+\end{equation}
+To do so, we make some observations: \\
+\\
+(1): On account of the time delta function, by definition the RHS of the non-homogeneous equation is zero at all $t$ except for $t=\tau$. Also, because the initial condition is $u=0$ and $\pdv{}{t}u = 0$ at $=0$, we know that nothing happens until $t=\tau$. \\
+\\
+(2): We also know that when $t>\tau$, the RHS is again zero because of the delta function. So the original equation is actually homogeneous everywhere except at $t=\tau$.\\
+\\
+(3): So the question is, what happens at $t=\tau$ in the non-homogeneous PDE? We need this information to define our second initial condition as well as to ascertain whether there is a jump in u at $t=\tau$, which would make this task impossible. To do this we integrate the non-homogeneous PDE with respect to time across an arbitrarily small domain around $t=\tau$:
+\begin{equation}
+\begin{aligned}
+\int_{\tau -}^{\tau +}\Big{[} (\pdv[2]{}{t} - c^2\pdv[2]{}{x})u \Big{]}dt = \int_{\tau -}^{\tau+}\delta(x-\xi)\delta (t-\tau)dt\\
+\int_{\tau -}^{\tau +}\pdv[2]{}{t}u dt - \int_{\tau -}^{\tau +}c^2\pdv[2]{}{x}u dt = \delta (x-\xi)\int_{\tau -}^{\tau+}\delta (t-\tau)dt
+\end{aligned}
+\end{equation}
+Now a few observations. We know that when $t<\tau$ that $u=0$, so the first integral is simply equivalent to $\pdv{}{t}u$ evaluated at $\tau+$. Integrating the spatial second derivative across an arbitrarily small time span must be zero. If this weren't the case, $u$ itself would be a delta function in time, and the second derivative of $u$ in the original PDE doesn't indicate any huge singularity like that on the RHS. Lastly, the RHS is equal to $\delta(x-\xi)$ since the derivative across the zero of a delta function is by definition equal to 1. This means the second BC is:
+\begin{equation}
+\begin{aligned}
+\pdv{}{t} \Big{|}_{\tau +} = \delta(x-\xi)
+\end{aligned}
+\end{equation}
+Lastly, we can observe that if there was a jump at $t=\tau$, $\pdv{}{t}u$ at that precise point would be very large, i.e. it would itself be equal to some kind of $t$ delta function. This isn't the case, and so we know there is no jump there and thus the other initial condition must be $u=0$ at $t=\tau$, and we have achieved our objective.
+
+\end{document}

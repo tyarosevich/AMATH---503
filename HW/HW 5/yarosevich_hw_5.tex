@@ -12,6 +12,7 @@
 \usepackage{listings}
 \usepackage{setspace}
 \usepackage{matlab-prettifier}
+\usepackage{physics}
 \usepackage{float}
 \usepackage[most]{tcolorbox}
 \usepackage{amsfonts}
@@ -84,69 +85,75 @@ Instructor: Professor Ka-Kit Tung % Instructor/supervisor
 %	SECTION 1
 %----------------------------------------------------------------------------------------
 \section*{\textbf{(1)}}
-If we have a Bessel Equation of the form:
+If we use the eigenfunction and eigenvalue from the prompt, assuming we started with a a $\lambda^2$ in the function and not $\lambda$, we have:
 \begin{equation}
 \begin{aligned}
-(xy')' + (\lambda^2x - \frac{m^2}{x})y = 0\\
-0 < x < a\\
-y \text{ bounded at } x = 0, \text{ , } y(a) = 0\\
+\phi_p = J_p(\lambda r)\\
+\lambda_{pj} = \frac{z_{jp}}{a}\\
 \end{aligned}
 \end{equation}
-We know from the notes and previous homework that this will be solved by the eigenfunctions $J_m(\lambda x)$. The eigenfunctions are derived with the Frobenius solution, and the eigenvalues are implicitly determined by from the zeros of the eigenfunctions, which are cosine-like. Given this, let the eigenfunctions be $J_m(\lambda_{mn}x)$ and the eigenvalues $(\lambda_{mn} = \frac{z_{mn}}{a})$ where $z_{mn}$ are the zeros of the eigenfunction. We use the equation above and observe that this is a Sturm-Liouville  system with:
+Where $z_{jp}$ is the $p$'th zero of $J$. We know from the notes that for a cylindrical Bessel's function like this, we have the following values for $p,r,q$ when $b=0$ as it does here. 
 \begin{equation}
 \begin{aligned}
-p(x) = x\\
-r(x) = x\\
-q(x) = \frac{p^2}{x}\\
+p(r) = \lambda r\\
+r(r) = \lambda r\\
+q(r) = \frac{p^2}{\lambda r}\\
 \end{aligned}
 \end{equation}
-We now consider two pairs of eigenfunctions and eigenvalues, $(J_m(\lambda_{mn}x);\lambda_{mn})$ and $(J_k(\lambda_{kn}x)); \lambda_{kx})$ and plug them into the Bessel's Equation, giving:
+We now consider two pairs of eigenfunctions and eigenvalues:
 \begin{equation}
 \begin{aligned}
-(xJ_m(\lambda_{mn}x)')' + (\lambda_{mn}^2x - \frac{p^2}{x}) = 0\\
-(xJ_k(\lambda_{mn}x)')' + (\lambda_{kn}^2x - \frac{p^2}{x}) = 0
+\phi_k = J_k(\lambda r); \lambda_k =\frac{z_{pk}}{a}\\ \\
+\phi_j = J_j(\lambda r); \lambda_j =\frac{z_{pj}}{a}\\ \\
 \end{aligned}
 \end{equation}
-We then follow the logic of the general proof of S-L orthogonality by multiplying the first by $J_k(\lambda_{kn}x)$ and the second by $J_m(\lambda_{mn}x)$ then subtracting one from the other:
+Plugging these into the Bessel function:
 \begin{equation}
 \begin{aligned}
-J_k(\lambda_{kn}x) (xJ_m(\lambda_{mn}x)')' - J_m(\lambda_{mn}x)(xJ_k(\lambda_{kn}x)')' = (\lambda_{mn} - \lambda_{kn})xJ_m(\lambda_{mn}x)J_k(\lambda_{kn}x)\\
+(p\phi_k')' + (\lambda_k x - \frac{p^2}{x})\phi_k = 0\\
+(p\phi_j')' + (\lambda_j x - \frac{p^2}{x})\phi_j = 0\\
+\end{aligned}
+\end{equation}
+We then follow the logic of the general proof of S-L orthogonality by multiplying the first by $\phi_j$ and the second by $\phi_k$ then subtracting one from the other:
+\begin{equation}
+\begin{aligned}
+\phi_j(p\phi_k')' - \phi_k(p\phi_j)' = (\lambda_j - \lambda_k)r\phi_j\phi_k
 \end{aligned}
 \end{equation}
 The LHS is a derivative, so we rewrite as follows:
 \begin{equation}
 \begin{aligned}
-\frac{d}{dx} \Big{[}J_k(\lambda_{kn}x)(xJ_m(\lambda_{mn}x))') - J_m(\lambda_{mn}x)(J_k(\lambda_{kn}x)') \Big{]} = \Big{[}(\lambda_{mn} - \lambda_{kn})xJ_m(x)J_k(x)\Big{]}\
+\frac{d}{dr} \Big{[}\phi_j(p\phi_k')' - \phi_k(p\phi_j') \Big{]} = (\lambda_j - \lambda_k)r(r)\phi_j\phi_k\\
 \end{aligned}
 \end{equation}
 We then integrate both sides giving:
 \begin{equation}
 \begin{aligned}
- \Big{[}J_k(\lambda_{kn}x)(xJ_m(\lambda_{mn}x))') - J_m(\lambda_{mn}x)(J_k(\lambda_{kn}x)') \Big{]}\Big{|}_0^a = \int_0^a\Big{[}(\lambda_{mn} - \lambda_{kn})xJ_m(\lambda_{mn}x)J_k(\lambda_{kn}x)\Big{]}dx
+\Big{[}\phi_j(p\phi_k')' - \phi_k(p\phi_j') \Big{]}\Big{|}_0^a = (\lambda_j - \lambda_k)\int_0^ar(r)\phi_j\phi_kdr\\
 \end{aligned}
 \end{equation}
-We then observe that, since this is a singular S-L system and $p(x) = 0$ at $x=0$ and $x=a$. In this case, $p(x) = x$ so it' a little confusing, but let's just suppose we have a dummy variable for a moment, and $p(s) = s$. Then in a singular S-L system, $p(s) = x = 0$ when $s = 0, a$. From this we can infer that the LHS must be identically zero. This gives:
+We can observe here that the LHS goes to zero because (i) p(0) = 0, and (ii) because at the boundary $a$ the eigenfunctions will be $\phi_{j/k} = J_{j/k}(z_{mn}(\frac{a}{a})$ which goes to zero because the $a$'s cancel, leaving only the zero of the eigenfunction. This results in:
 \begin{equation}
  \begin{aligned}
-(\lambda_{mn} - \lambda_{kn})\int_0^axJ_m(\lambda_{mn}x)J_k(\lambda_{kn}x)dx = 0
+ (\lambda_j - \lambda_k)\int_0^ar(r)\phi_j\phi_kdr = 0
 \end{aligned}
 \end{equation}
-We can now simply observe that, if $\lambda_{mn} = \lambda_{kn}$, the leading constant becomes zero, and the integral becomes:
+We can now simply observe that, if $\lambda_j = \lambda_k$, the leading constant becomes zero, and the integral becomes:
 \begin{equation}
 \begin{aligned}
-\int_0^ax(J_m(\lambda_{mn}x))^2dx
+\int_0^ar(r)(\phi_j)^2dr
 \end{aligned}
 \end{equation}
-This integral is a positive constant since $x>0$ for this Bessel function, and the eigenfunction is squared. The integral is $ax(J_m(a\lambda_{mn}x))^2 >0$ and therefore a positive constant. \\
+This integral is a positive constant since the Bessel function defines $r(r)>0$, and the eigenfunction is squared.
 \\
-Alternatively, if $\lambda_{mn} \neq \lambda_{kn}$, this integral must be identically zero. The resulting integral is thus:
+Alternatively, if $\lambda_j \neq \lambda_k$, this integral must be identically zero. The resulting integral is thus:
 \begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
 \begin{equation}
 \begin{aligned}
-\int_0^axJ_m(\lambda_{mn}x)J_k(\lambda_{kn}x)dx =
+\int_0^ar(r)\phi_k\phi_j dr =
  \begin{cases} 
-      0, & \lambda_{mn} \neq \lambda_{kn} \\
-      c, & \lambda_{mn} = \lambda_{kn}
+      0, & \lambda_k \neq \lambda_j \\
+      c, & \lambda_k = \lambda_j
    \end{cases}
 \end{aligned}
 \end{equation}
@@ -154,6 +161,8 @@ Where $c>0$ is a constant.
 \end{tcolorbox}
 \section*{\textbf{(2)}}
 \subsection*{\textbf{(a)}}
+It is extremely unclear to me what this problem is asking, and so I'm going to follow the derivation of the D'Alembert solution in the context of the problem.\\
+\\
 From the prompt we know that, with spherical symmetry, the 3D wave equation becomes:
 \begin{equation}
 \begin{aligned}
@@ -166,57 +175,146 @@ Bringing the $r$ to the LHS, we can note that it is constant variable with respe
 (ru)_{tt} = c^2(ru)_{rr}
 \end{aligned}
 \end{equation}
-Now let's substitute $v= ru$ and plug the resulting equation into the D'Alembert Solution:
+Let $z = ru$, and then we proceed to a D'Alembert solution, starting with a variable transform:
 \begin{equation}
 \begin{aligned}
-v_{tt} = c^2v_{rr}\\
-v(r,t) = \frac{1}{2} \Big{[}g(r - ct) + g(r + ct) + \frac{1}{2c}\int^{r+ct}_{r-ct}h(s)ds
+k = r+ct, s = r-ct\\
+r= \frac{1}{2}(r+s), t = \frac{1}{2c}(r - s)\\
 \end{aligned}
 \end{equation}
-To transform $g$ back to its equivalent term in $u$:
+The differential operators are now:
 \begin{equation}
 \begin{aligned}
-v(r,0) = g(r)\\
+\pdv{}{r} = \pdv{}{t}\pdv{t}{k} + \pdv{}{r}\pdv{r}{k} = \frac{1}{2c}\pdv{}{t} + \frac{1}{2}\pdv{}{r} = \frac{1}{2c}(\pdv{}{t} + c\pdv{}{r})\\
+\pdv{}{s} = \pdv{}{t}\pdv{t}{s} + \pdv{}{r}\pdv{r}{s} = -\frac{1}{2c}\pdv{}{t} + \frac{1}{2}\pdv{}{r} = -\frac{1}{2c}(\pdv{}{t} + c\pdv{}{r})\\
 \end{aligned}
 \end{equation}
-And the final form of the equation is:
+Now if:
 \begin{equation}
 \begin{aligned}
-u(r,0) = f(r)
+\pdv[2]{}{t}z -c^2\pdv[2]{}{r}z = 0\\
+(\pdv[2]{}{t} - c^2 \pdv[2]{}{r})z = 0\\
+(\pdv{}{t} - c^2 \pdv{}{r})(\pdv{}{t} - c^2 \pdv{}{r})z = 0\\
+\text{using our differential operators above:}\\
+(2c \pdv{}{k})(-2c\pdv{}{s})z = 0\\
+(-4c^2)\pdv{}{k}\pdv{}{s}z = 0\\
+\pdv{}{k}\pdv{}{s}z = 0\\
 \end{aligned}
 \end{equation}
-Thus we have:
+Solving this we get:
 \begin{equation}
 \begin{aligned}
-\frac{1}{r}v(r,0) = u(r,0)\\
-\frac{1}{r}g(r) = f(r)\\
-g(r) = r f(r)\\
+\pdv{z}{s} = f(s)\\
+\text{where $f(s)$ is some function of $s$.}\\
+z(s,k) = \int f(s) + G(k)\\
+\text{where $G(k)$ is some function of $k$.}\\
+z(s,k) = F(s) + G(k)\\
+\text{Where $F$ is the antiderivative of $f$:}\\
 \end{aligned}
 \end{equation}
-Similarly, we observe that:
+Substituting the original functions of $k/s$:
 \begin{equation}
 \begin{aligned}
-v_t = \frac{d}{dt} \Big{[}\frac{1}{2c}\int^{r+ct}_{r-ct}h(s)ds \Big{]}\\
-v_t =\frac{1}{2c} \frac{d}{dt} \Big{[}H(r+ct) - H(r-ct) \Big{]}\\
-v_t = \frac{1}{2c} \Big{[}h(r+ct)(c) - h(r-ct)(-c)\Big{]}\\
-v_t = \frac{1}{2} \Big{[}h(r+ct) + h(r-ct)\\
-v_t(r,0) = h(r)\\
-ru_t(r,0) = h(r)\\
-u_t(r,0) = \frac{1}{r}h(r)\\
-\text{So we define some new function:}\\
-u_t(r,0) = k(r)\\
-rk(r) = h(r)
+z(r,t) = F(r-ct) + G(r+ct)\\
 \end{aligned}
 \end{equation}
-We then substitute all the transformed terms into the solution and replace the $r$ terms with suitable $r\pm ct$ or $s$ and get:
+Fitting this to general initial conditions:
+\begin{equation}
+\begin{aligned}
+z(r,0) = F(r) + G(r) = z_0
+z_t(r,t) = -cF'(r - ct) + cG'(r-ct)\\
+z_t(r,0) = -cF'(r) + cG'(r) = v_0
+\end{aligned}
+\end{equation}
+Integrating in order to get two equations with the same form of $F$ and $G$:
+\begin{equation}
+\begin{aligned}
+-cF(r) + cG(r) = \int_0^r v_0(\bar{x})d\bar{x}
+\end{aligned}
+\end{equation}
+Now we multiply $z(r,0)$ above by $c$ and add it to the second equation:
+\begin{equation}
+\begin{aligned}
+2cG(r) = \int_0^r v_0(\bar{x})d\bar{x} + cz_0(r)\\
+G(x) = \frac{1}{2c}(\int_0^r v_0(\bar{x})d\bar{x}) + \frac{1}{2}z_0(r)\\
+\end{aligned}
+\end{equation}
+Next we multiply $z(r,0)$ by $-c$ and add to the second equation:
+\begin{equation}
+\begin{aligned}
+-2cF(r) = -c z_0(r)  +  \int_0^r v_0(\bar{x})d\bar{x}\\
+F(r) = \frac{1}{2}z_0(r) - \frac{1}{2c}(\int_0^r v_0(\bar{x})d\bar{x}) 
+\end{aligned}
+\end{equation}
+To get our solution we simply plug these into our original function above, and combine the integrals by changing the sign of the second one and swapping its bounds of integration.
+\begin{equation}
+\begin{aligned}
+z(r,t) = \frac{1}{2}(z_0(r-ct) + z_0(r + ct)) + \frac{1}{2c}\int_{r-ct}^{r+ct}v_0(\bar{x})d\bar{x}
+\end{aligned}
+\end{equation}
+Allowing that $u = \frac{z}{r}$ the final solution is:
 \begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
 \begin{equation}
 \begin{aligned}
-ru(r,t) = \frac{1}{2} \Big{[}(r-ct)f(r-ct) + (r+ct)f(r+ct) + \frac{1}{2c}\int_{r-ct}^{r+ct}sk(s)ds\\
-u(r,t) = \frac{1}{2r} \Big{[}(r-ct)f(r-ct) + (r+ct)f(r+ct) + \frac{1}{2c}\int_{r-ct}^{r+ct}sk(s)ds\\
+u(r,t) = \frac{1}{2r}(z_0(r-ct) + z_0(r + ct)) + \frac{1}{2rc}\int_{r-ct}^{r+ct}v_0(\bar{x})d\bar{x}
 \end{aligned}
 \end{equation}
 \end{tcolorbox}
+\subsection*{\textbf{(b)}}
+The outgoing wave is the one determined by $z_0(r-ct)$, since this is the compression wave corresponding with an increasing $r$ as $t$ increases in order to track the wave's movement.
+
+
+% Now let's substitute $v= ru$ and plug the resulting equation into the D'Alembert Solution:
+% \begin{equation}
+% \begin{aligned}
+% v_{tt} = c^2v_{rr}\\
+% v(r,t) = \frac{1}{2} \Big{[}g(r - ct) + g(r + ct) + \frac{1}{2c}\int^{r+ct}_{r-ct}h(s)ds
+% \end{aligned}
+% \end{equation}
+% To transform $g$ back to its equivalent term in $u$:
+% \begin{equation}
+% \begin{aligned}
+% v(r,0) = g(r)\\
+% \end{aligned}
+% \end{equation}
+% And the final form of the equation is:
+% \begin{equation}
+% \begin{aligned}
+% u(r,0) = f(r)
+% \end{aligned}
+% \end{equation}
+% Thus we have:
+% \begin{equation}
+% \begin{aligned}
+% \frac{1}{r}v(r,0) = u(r,0)\\
+% \frac{1}{r}g(r) = f(r)\\
+% g(r) = r f(r)\\
+% \end{aligned}
+% \end{equation}
+% Similarly, we observe that:
+% \begin{equation}
+% \begin{aligned}
+% v_t = \frac{d}{dt} \Big{[}\frac{1}{2c}\int^{r+ct}_{r-ct}h(s)ds \Big{]}\\
+% v_t =\frac{1}{2c} \frac{d}{dt} \Big{[}H(r+ct) - H(r-ct) \Big{]}\\
+% v_t = \frac{1}{2c} \Big{[}h(r+ct)(c) - h(r-ct)(-c)\Big{]}\\
+% v_t = \frac{1}{2} \Big{[}h(r+ct) + h(r-ct)\\
+% v_t(r,0) = h(r)\\
+% ru_t(r,0) = h(r)\\
+% u_t(r,0) = \frac{1}{r}h(r)\\
+% \text{So we define some new function:}\\
+% u_t(r,0) = k(r)\\
+% rk(r) = h(r)
+% \end{aligned}
+% \end{equation}
+% We then substitute all the transformed terms into the solution and replace the $r$ terms with suitable $r\pm ct$ or $s$ and get:
+% \begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
+% \begin{equation}
+% \begin{aligned}
+% ru(r,t) = \frac{1}{2} \Big{[}(r-ct)f(r-ct) + (r+ct)f(r+ct) + \frac{1}{2c}\int_{r-ct}^{r+ct}sk(s)ds\\
+% u(r,t) = \frac{1}{2r} \Big{[}(r-ct)f(r-ct) + (r+ct)f(r+ct) + \frac{1}{2c}\int_{r-ct}^{r+ct}sk(s)ds\\
+% \end{aligned}
+% \end{equation}
+% \end{tcolorbox}
 \section*{\textbf{(3)}}
 \subsection*{\textbf{(a)}}
 In the steady state solution $u_{tt} = 0$ thus:
@@ -386,6 +484,7 @@ n = 1,3,5...
 \end{aligned}
 \end{equation}
 \end{tcolorbox}
+
 Applying the Initial Conditions:
 \begin{equation}
 \begin{aligned}
