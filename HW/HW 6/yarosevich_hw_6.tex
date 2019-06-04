@@ -92,7 +92,7 @@ Given the solution to the Green's Function for the Heat Equation in 1-D stated o
 G(x, t;\xi, \tau) &= \frac{1}{\sqrt{4\pi D(t-\tau)}}\Big{[} e^{-\frac{(x-\xi)^2}{4D(t-\tau)}} -e^{-\frac{(x+\xi)^2}{4D(t-\tau)}}\Big{]}
 \end{aligned}
 \end{equation}
-To show this satisfies the BC, we can simply observe that if $x=0$, the two exponential terms are equivalent since the only difference is the $\pm\xi$ term, which is squared anyway. The other boundary condition is still satisfied since both of these exponentials have negative terms, and will go to zero as $x\to\infty$.
+To show this satisfies the BC, we can simply observe that if $x=0$, the two exponential terms are equivalent since the only difference is the $\pm\xi$ term, which is squared anyway. The other boundary condition is still satisfied since both of these exponentials are raised to a strictly negative power increasing with x, and will go to zero as $x\to\infty$.
 \subsection*{\textbf{(b)}}
 To satisfy a boundary condition of $\pdv{}{x}G$ at $x=0$, we can observe that if we add a solution mirrored across the $G$ axis, the two resulting normal distributions will have equal slope, but opposite in sign, at $x=0$:
 \begin{equation}
@@ -113,7 +113,7 @@ When $x=0$, again the two terms cancel since the sign on the $-\xi$ carries out,
  \frac{2(\xi)}{4D(t-\tau)}e^{-\frac{(-\xi)^2}{4D(t-\tau)}} - \frac{2(\xi)}{4D(t-\tau)}e^{-\frac{(\xi)^2}{4D(t-\tau)}}=0\\
 \end{aligned}
 \end{equation}
-Again, the BC of $G=0$ as $x\to\infty$ is still satisfied since both normal distributions are raised to strictly negative exponent dependent on $x$.
+Again, the BC of $G=0$ as $x\to\infty$ is still satisfied since both normal distributions are raised to strictly negative exponent increasing with $x$.
 \section*{\textbf{(2)}}
 \subsection*{\textbf{(a)}}
 We want to show that 
@@ -136,19 +136,99 @@ To do so, we make some observations: \\
 \\
 (2): We also know that when $t>\tau$, the RHS is again zero because of the delta function. So the original equation is actually homogeneous everywhere except at $t=\tau$.\\
 \\
-(3): So the question is, what happens at $t=\tau$ in the non-homogeneous PDE? We need this information to define our second initial condition as well as to ascertain whether there is a jump in u at $t=\tau$, which would make this task impossible. To do this we integrate the non-homogeneous PDE with respect to time across an arbitrarily small domain around $t=\tau$:
+(3): So the question is, what happens at $t=\tau$ in the non-homogeneous PDE? We need this information to define our second initial condition as well as to ascertain whether there is a jump in $u$ at $t=\tau$, which would make this task impossible. To do this we integrate the non-homogeneous PDE with respect to time across an arbitrarily small domain around $t=\tau$:
 \begin{equation}
 \begin{aligned}
 \int_{\tau -}^{\tau +}\Big{[} (\pdv[2]{}{t} - c^2\pdv[2]{}{x})u \Big{]}dt = \int_{\tau -}^{\tau+}\delta(x-\xi)\delta (t-\tau)dt\\
 \int_{\tau -}^{\tau +}\pdv[2]{}{t}u dt - \int_{\tau -}^{\tau +}c^2\pdv[2]{}{x}u dt = \delta (x-\xi)\int_{\tau -}^{\tau+}\delta (t-\tau)dt
 \end{aligned}
 \end{equation}
-Now a few observations. We know that when $t<\tau$ that $u=0$, so the first integral is simply equivalent to $\pdv{}{t}u$ evaluated at $\tau+$. Integrating the spatial second derivative across an arbitrarily small time span must be zero. If this weren't the case, $u$ itself would be a delta function in time, and the second derivative of $u$ in the original PDE doesn't indicate any huge singularity like that on the RHS. Lastly, the RHS is equal to $\delta(x-\xi)$ since the derivative across the zero of a delta function is by definition equal to 1. This means the second BC is:
+Now a few observations. We know that when $t<\tau$ that $u=0$, so the first integral is simply equivalent to $\pdv{}{t}u$ evaluated at $\tau+$. Integrating the spatial second derivative across an arbitrarily small time span must be zero. If this weren't the case, $u$ itself would be a delta function in time, and the second derivative of $u$ in the original PDE doesn't indicate any huge singularity like that on the RHS. Lastly, the RHS is equal to $\delta(x-\xi)$ since the derivative across the zero of a delta function is by definition equal to 1. This means that one of the initial conditions of the homogeneous equation must take the following into account at $t=\tau$:
 \begin{equation}
 \begin{aligned}
 \pdv{}{t} \Big{|}_{\tau +} = \delta(x-\xi)
 \end{aligned}
 \end{equation}
-Lastly, we can observe that if there was a jump at $t=\tau$, $\pdv{}{t}u$ at that precise point would be very large, i.e. it would itself be equal to some kind of $t$ delta function. This isn't the case, and so we know there is no jump there and thus the other initial condition must be $u=0$ at $t=\tau$, and we have achieved our objective.
-
+Lastly, we can observe that if there was a jump at $t=\tau$, $\pdv{}{t}u$ at that precise point would be very large, i.e. it would itself be equal to some kind of $t$ delta function. This isn't the case, and so we know there is no jump there and thus the other initial condition must be $u=0$ at $t=\tau$, and we have achieved our objective, as these are the "initial conditions" the prompt gives for the homogeneous, fundamental problem.
+\subsection*{\textbf{(b)}}
+In accordance with the D'Alembert solution we assume a solution with the form of two travelling waves moving with speed $c$ in relation to time $t-\tau$.
+\begin{equation}
+\begin{aligned}
+u = R(x- c(t-\tau)) + L(x + c(t-\tau))
+\end{aligned}
+\end{equation}
+Applying the first initial condition $u=0$ at $t=\tau$ we have:
+\begin{equation}
+\begin{aligned}
+u = R(x) + L(x) = 0\\
+L(x) = -R(x)\\
+u = R(x + c(t-\tau) - R(x - c(t - \tau))
+\end{aligned}
+\end{equation}
+To plug in the second initial condition, we need to take the derivative of $u$ in time and then plug in the initial condition of the derivative at $t=\tau$:
+\begin{equation}
+\begin{aligned}
+u_t = -cR'(x+c(t-\tau)) - cR'(x-c(t-\tau))\\
+u_t(t=\tau) = -2cR'(x) = \delta(x-\xi)
+\end{aligned}
+\end{equation}
+To find $R$ we integrate, introducing a dummy variable. Note that we are integrating from $-\infty$ to $x$ since when $x>\xi$ we won't be picking up anything because we are integrating a delta function. Thus we have:
+\begin{equation}
+\begin{aligned}
+\int R' = -\frac{1}{2c}\int \delta(x-\xi)dx\\
+R = -\frac{1}{2c}\int_{-\infty}^x \delta(\bar{x}-\xi)d\bar{x}\\
+\end{aligned}
+\end{equation}
+The integral of a delta function is the Heavyside step function, thus we have the following for $R$:
+\begin{equation}
+\begin{aligned}
+R = -\frac{1}{2c}H(x-\xi) = 
+ \begin{cases} 
+      0, & x < \xi \\
+      \frac{-1}{2c} &  x > \xi
+   \end{cases}
+\end{aligned}
+\end{equation}
+Thus the solution to the PDE with both initial conditions applied is as follows:
+\begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
+\begin{equation}
+\begin{aligned}
+u(x,t) = \frac{1}{2c} \Big{[}H(x - \xi + c(t-\tau)) - H(x- \xi - c(t-\tau)) \Big{]}
+\end{aligned}
+\end{equation}
+\end{tcolorbox}
+\subsection*{\textbf{(c)}}
+To reconstruct a solution we integrate the fundamental problem multiplied by the forcing term evaluated at $\tau$ and $\xi$ across space and time to get the particular solution, noting that the evaulation of $\tau$ stops at $t$ because when $\tau > t$ the Green's Function is equal to zero anyway (I think?). 
+\begin{equation}
+\begin{aligned}
+u_p = \frac{1}{2c}\int_0^t d\tau \int_{-\infty}^\infty \Big{[}H(x - \xi + c(t-\tau)) - H(x- \xi - c(t-\tau)) \Big{]} Q(\xi,\tau)d\xi
+\end{aligned}
+\end{equation}
+Because the Heavyside functions describe an expanding box starting at $x=\xi$ and then expanding to the left and right as time increases, it is easy to simplify the integral to simply evaluate 1 across the domain, thus giving the area. Since we've pulled out the $\frac{1}{2c}$, the height of the box is one and it's width extends from $x-\xi - c(t-\tau)$ to $x-\xi + c(t-\tau)$. The $\xi$ can be dropped from the bounds since it would fall out in the evaluation of the integral anyway. We are left with:
+\begin{tcolorbox}[minipage,colback=white,arc=0pt,outer arc=0pt]
+\begin{equation}
+\begin{aligned}
+u_p(x,t) = \frac{1}{2c}\int_0^td\tau\int_{x-c(t-\tau)}^{x+c(t-\tau)}Q(\xi,\tau)d\xi
+\end{aligned}
+\end{equation}
+\end{tcolorbox}
+Lastly, we need the homogeneous solution to the PDE, though it seems obvious to me it must be trivial since we have zero initial condition, zero initial velocity and a zero boundary condition. Using d'Alembert's solution I'll use the variable $v$ to distinguish it from the forced PDE: $v_{tt} -c^2v_{xx} = 0$ with $v(x,0) = 0$ and $\frac{d}{dt}v(x,0) = 0$.
+\begin{equation}
+\begin{aligned}
+v(x,t) = R(x-ct) + L(x+ct)\\
+v(x,0) = 0\\
+v(x,t) = R(x-ct) - R(x+ct)\\
+v_t(x,t) = -cR'(x-ct) - cR'(x+ct)\\
+v_t(x,0) = 0 = -2cR'(x)
+\end{aligned}
+\end{equation}
+Integrating:
+\begin{equation}
+\begin{aligned}
+-2cR(x) = K\\
+R(x) = K\\
+v(x,t) = K - K = 0\\
+\end{aligned}
+\end{equation}
+Thus the solution should just be the above particular solution by itself.
 \end{document}
